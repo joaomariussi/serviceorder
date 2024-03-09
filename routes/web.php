@@ -1,18 +1,16 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Todas as rotas estão dentro do grupo 'web' e, portanto, são protegidas pelo middleware 'web'
+Route::group(['middleware' => 'web'], function () {
+    // Rota da página inicial
+    Route::get('/', [HomeController::class, 'index'])->name('site.home')->middleware('auth');
 
-Route::get('/', function () {
-    return view('welcome');
+    // Rotas relacionadas à autenticação
+    Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 });
