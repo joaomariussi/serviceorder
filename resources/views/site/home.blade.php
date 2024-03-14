@@ -9,11 +9,14 @@
 </head>
 
 <body>
-<header>
-    <h1>Serviço de Ordem - Mecânica XYZ</h1>
+<header class="admin-header">
+    <h1 class="header-title">Serviço de Ordem - Mecânica XYZ</h1>
+    @if(Auth::check())
+        <p>Olá, {{ $user->nome }}</p>
+    @endif
 </header>
 <nav>
-    <a href="#">Início</a>
+    <a href="{{ route('site.home') }}">Início</a>
     <a href="#">Serviços</a>
     <a href="#">Contato</a>
     <a href="{{ route('logout') }}">Sair</a>
@@ -27,8 +30,5 @@
     </p>
     <a href="#" class="button">Agendar Serviço</a>
 </div>
-<footer>
-    <p>&copy; 2024 Mecânica XYZ. Todos os direitos reservados.</p>
-</footer>
 </body>
 </html>

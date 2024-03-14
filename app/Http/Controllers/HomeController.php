@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('site.home');
+        $user = Auth::user();
+        return view('site.home')->with('user', $user);
     }
 }

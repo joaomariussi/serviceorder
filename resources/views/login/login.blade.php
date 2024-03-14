@@ -6,6 +6,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="login-container">
@@ -20,7 +21,7 @@
     @endif
 
     @if(auth()->check())
-        <p>Está logado - <a href="{{ route('logout') }}">Sair</a></p>
+        <a href="{{ route('logout') }}">Sair</a>
     @else
         @error('error')
         <div class="alert alert-danger">
@@ -39,18 +40,15 @@
             </div>
 
             <div class="form-group">
-                <input class="form-input" type="password" name="password" value="1234" placeholder="Senha" required>
-                @error('password')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                <div class="input-login password">
+                    <input class="form-input" type="password" name="password" value="1234" placeholder="Senha" required>
+                    <button type="button" id="showPassword" class="button show">👁</button>
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="checkbox">
-                    <input type="checkbox" value="remember" id="rememberMe" name="remember">
-                    Lembrar-me
-                </label>
-            </div>
 
             <div class="form-group">
                 <button class="btn btn-primary btn-lg">Login</button>
@@ -60,3 +58,21 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#showPassword').on('click', function(){
+            var passwordField = $('input[name="password"]');
+            var passwordFieldType = passwordField.attr('type');
+
+            if(passwordFieldType == 'password')
+            {
+                passwordField.attr('type', 'text');
+                $(this).removeClass('show');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).addClass('show');
+            }
+        });
+    });
+</script>
