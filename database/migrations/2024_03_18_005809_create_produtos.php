@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstados extends Migration
+class CreateProdutos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateEstados extends Migration
      */
     public function up()
     {
-        Schema::create('estados', function (Blueprint $table) {
+        Schema::create('produtos', function (Blueprint $table) {
             $table->id();
+            $table->integer('codigo');
             $table->string('nome');
-            $table->string('sigla');
+            $table->string('descricao');
+            $table->decimal('preco');
+            $table->integer('quantidade');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateEstados extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estados');
+        Schema::dropIfExists('produtos');
     }
 }

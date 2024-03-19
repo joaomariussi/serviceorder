@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCidades extends Migration
+class CreateVeiculos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateCidades extends Migration
      */
     public function up()
     {
-        Schema::create('cidades', function (Blueprint $table) {
+        Schema::create('veiculos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->unsignedBigInteger('estado_id'); // Use unsignedBigInteger para chaves estrangeiras
-            $table->foreign('estado_id')->references('id')->on('estados'); // Define a chave estrangeira
+            $table->string('marca');
+            $table->string('modelo');
+            $table->string('ano');
+            $table->string('placa');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateCidades extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cidades');
+        Schema::dropIfExists('veiculos');
     }
 }
