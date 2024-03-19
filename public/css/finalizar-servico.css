@@ -1,0 +1,201 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+    color: #333;
+}
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+nav {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+.container-servico {
+    max-width: 1200px;
+    margin: 20px auto; /* Define a margem superior e inferior como 20px e as laterais como automáticas para centralizar */
+    padding: 10px 20px;
+    background-color: #fff;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.admin-header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.admin-header p {
+    margin: 0;
+}
+
+.header-title {
+    color: #f9fcff;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 500px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.label-servico {
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select,
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select:invalid {
+    border-color: red; /* Altera a cor da borda para indicar um estado inválido */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* CSS do modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+::placeholder {
+    color: #000000;
+}
+
+.form-servico {
+    width: auto;
+}
+
+.number-servico {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.textarea-servico {
+    width: 100%;
+    padding: 10px;
+    margin: 7px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-servico {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao-finalizar {
+    padding: 10px 25px;
+    color: #fff;
+    background-color: #1220ff;
+    border-color: #1220ff;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right; /* Move o botão para o canto direito */
+}
+
+.botao-voltar {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botoes-navegacao {
+    margin-top: 20px;
+}
