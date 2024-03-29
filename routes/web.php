@@ -17,8 +17,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     // Rotas relacionadas à ordem de serviço
-    Route::get('/servico', [ServicoController::class, 'index'])
-        ->name('site.servico')->middleware('auth');
-    Route::any('/finalizar-servico', [ServicoController::class, 'criarServico'])
-        ->name('site.finalizar-servico')->middleware('auth');
+    Route::get('/servico', [ServicoController::class, 'index'])->name('site.servico')->middleware('auth');
+    Route::any('/finalizar-servico', [ServicoController::class, 'criarServico'])->name('site.finalizar-servico')->middleware('auth');
+    Route::get('/produtos', [ServicoController::class, 'listarProdutos'])->name('produtos.listar');
 });
