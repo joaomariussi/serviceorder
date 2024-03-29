@@ -1,16 +1,11 @@
-@extends('site._partials.basico')
+@extends('site._partials.basic')
 
-<link rel="stylesheet" href="{{ asset('css/home.css') }}">
-<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-<link rel="stylesheet" href="{{ asset('css/servico.css') }}">
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/servico.css') }}">
+@endpush
 
 @section('conteudo')
-    <nav>
-        <a href="{{ route('site.home') }}">Início</a>
-        <a href="{{ route('site.servico') }}">Serviços</a>
-        <a href="#">Contato</a>
-        <a href="{{ route('logout') }}">Sair</a>
-    </nav>
+    @include('site._partials.header')
     <body>
     <div class="container-servico">
         <h1>Cadastro de Ordem de Serviço</h1>
@@ -19,16 +14,18 @@
             @csrf
             <div class="form-group">
                 <label class="label-servico" for="cliente">Cliente:</label>
-                <select name="cliente" id="cliente" required>
+                <select name="clientes" id="cliente" required>
                     <option disabled selected>Selecione um Cliente</option>
-                    <option value="1">Cliente 1</option>
+                    @foreach($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                    @endforeach
                 </select>
             </div>
 
             <div class="carro-cliente">
                 <div class="form-group">
                     <label class="label-servico" for="nome_carro">Carro:</label>
-                    <input type="text" id="nome_carro" name="nome_carro" placeholder="Nome do seu Carro" required>
+                    <input class="input-carro" type="text" id="nome_carro" name="nome_carro" placeholder="Nome do seu Carro" required>
                 </div>
 
                 <div class="form-group">
@@ -77,13 +74,13 @@
 
                 <div class="form-group">
                     <label class="label-servico" for="ano">Ano:</label>
-                    <input step="any" class="number-servico" type="number" id="ano" name="ano"
+                    <input class="input-number-servico" step="any" type="number" id="ano" name="ano"
                            placeholder="Ano do seu Carro" required>
                 </div>
 
                 <div class="form-group">
                     <label class="label-servico" for="placa">Placa:</label>
-                    <input type="text" id="placa" name="placa" placeholder="Placa do seu Carro" required>
+                    <input class="input_placa" type="text" id="placa" name="placa" placeholder="Placa do seu Carro" required>
                 </div>
             </div>
             <button type="submit" class="botao-avancar">Avançar</button>

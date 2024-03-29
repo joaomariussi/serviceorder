@@ -1,8 +1,17 @@
-@extends('site._partials.basico')
+@extends('site._partials.basic')
 
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 <link rel="stylesheet" href="{{ asset('css/finalizar-servico.css') }}">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery Mask Money -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+
+<!-- Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 @section('conteudo')
     <nav>
@@ -20,28 +29,21 @@
                 <button type="button" id="openModal">Selecionar Produtos</button>
             </div>
 
-            <div class="form-group">
-                <label class="label-servico" for="quantidade">Valor da Mão de Obra:</label>
-                <input step="any" class="number-servico" type="number" id="quantidade" name="quantidade"
-                       placeholder="Quantidade" required>
-            </div>
-
-            <div class="form-group">
-                <label class="label-servico" for="valor_pecas">Valor Total:</label>
-                <input step="any" class="number-servico" type="number" id="valor_total" name="valor_total"
-                       placeholder="Valor total do Serviço" required>
+            <!-- Div para exibir os produtos selecionados -->
+            <div id="produtosSelecionados" class="produtos-selecionados">
+                <!-- Os produtos selecionados serão adicionados aqui -->
             </div>
 
             <div class="form-group">
                 <label class="label-servico" for="valor_mao_obra">Valor da Mão de Obra:</label>
-                <input step="any" class="number-servico" type="number" id="valor_mao_obra" name="valor_mao_obra"
-                       placeholder="Valor da Mão de Obra" required>
+                <input step="any" class="number-servico" type="text" id="valor_mao_obra" name="valor_mao_obra"
+                       placeholder="R$ 0,00" required>
             </div>
 
             <div class="form-group">
-                <label class="label-servico" for="valor_pecas">Valor Total:</label>
-                <input step="any" class="number-servico" type="number" id="valor_total" name="valor_total"
-                       placeholder="Valor total do Serviço" required>
+                <label class="label-servico" for="valor_total">Valor Total:</label>
+                <input step="any" class="number-servico" type="text" id="valor_total"
+                       name="valor_total" data-thousands="." data-decimal="," placeholder="R$ 0,00" required>
             </div>
 
             <button type="submit" class="botao-finalizar">Finalizar Serviço</button>
@@ -55,13 +57,18 @@
     </div>
     </body>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal">
+    <!-- Modal para selecionar produtos -->
+    <div id="myModal" class="modal-servico">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Selecionar Produtos</h2>
+            <span class="close" id="closeModal">&times;</span>
+            <select class="select-servico" id="produtos-list"></select>
+            <input class="label-script" type="number" id="quantidade" placeholder="Quantidade" min="1">
+            <button id="adicionarProduto">Adicionar</button>
+            <button class="button-cancelar" id="cancelar">Cancelar</button>
         </div>
     </div>
-
-    <script src={{ asset('js/scripts.js') }}></script>
 @endsection
+
+@push('scripts')
+    <script src={{ asset('js/scripts.js') }}></script>
+@endpush

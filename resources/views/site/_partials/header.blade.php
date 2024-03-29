@@ -1,3 +1,17 @@
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/header.css') }}">
+@endpush
+<header class="admin-header">
+    <div class="container-basic">
+        <h1 class="header-title">Serviço de Ordem - Mecânica XYZ</h1>
+        <div class="form-group">
+            @if(Auth::check())
+                <p class="name-user">Olá, {{ $user->nome }}</p>
+            @endif
+        </div>
+    </div>
+</header>
+
 <div class="menu">
     <nav>
         <a href="{{ route('site.home') }}">Início</a>
