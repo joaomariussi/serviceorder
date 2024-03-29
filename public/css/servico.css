@@ -33,16 +33,6 @@ nav a {
     background-color: #0056b3;
 }
 
-.admin-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
 .admin-header p {
     margin: 0;
 }
@@ -51,7 +41,6 @@ nav a {
     color: #f9fcff;
     font-size: 24px;
     font-weight: bold;
-    margin-left: 500px;
 }
 
 body {
@@ -84,8 +73,7 @@ h1 {
     margin-bottom: 5px;
 }
 
-select,
-input[type="text"] {
+select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -153,8 +141,22 @@ button:hover {
     width: auto;
 }
 
-.number-servico {
-    width: 100%;
+.input-carro {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-number-servico {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input_placa {
+    width: 98%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -199,3 +201,5 @@ button:hover {
 .botoes-navegacao {
     margin-top: 20px;
 }
+
+

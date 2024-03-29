@@ -110,7 +110,7 @@ button:hover {
 }
 
 /* CSS do modal */
-.modal {
+.modal-servico {
     display: none;
     position: fixed;
     z-index: 1;
@@ -196,6 +196,73 @@ button:hover {
     cursor: pointer;
 }
 
+.botao-voltar:hover {
+    background-color: #5a6268;
+}
+
 .botoes-navegacao {
     margin-top: 20px;
+}
+
+.botao-remover {
+    padding: 8px 15px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    margin-left: 10px; /* Espaçamento entre os botões e o preço */
+}
+
+/* Estilo para os contêineres dos produtos */
+.produto-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.botao-remover:hover {
+    background-color: #cc0000; /* Cor de fundo ao passar o mouse */
+}
+
+.select-servico {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px 0 20px 0;
+}
+
+.label-script {
+    display: flex;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100px;
+}
+
+.produtos-selecionados {
+    margin-bottom: 10px;
+}
+
+.button-cancelar {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-cancelar:hover {
+    background-color: #cc0000;
+}
+
+.close {
+    color: #000000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
