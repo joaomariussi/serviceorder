@@ -14,7 +14,7 @@
             @csrf
             <div class="form-group">
                 <label class="label-servico" for="cliente">Cliente:</label>
-                <select name="clientes" id="cliente" required>
+                <select name="id_cliente" id="cliente" required>
                     <option disabled selected>Selecione um Cliente</option>
                     @foreach($clientes as $cliente)
                         <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
@@ -83,12 +83,12 @@
                     <input class="input_placa" type="text" id="placa" name="placa" placeholder="Placa do seu Carro" required>
                 </div>
             </div>
-            <button type="submit" class="botao-avancar">Avançar</button>
+            <button type="submit" class="button-avancar">Avançar</button>
         </form>
 
         <div class="botoes-navegacao">
             <button type="button" onclick="window.location.href='{{ route('site.home') }}'"
-                    class="botao-voltar">Voltar para Home
+                    class="button-voltar">Voltar para Home
             </button>
         </div>
     </div>

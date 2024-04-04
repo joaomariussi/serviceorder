@@ -36,30 +36,46 @@ document.addEventListener('DOMContentLoaded', function () {
         // Obter o preço
         var selectedProductPrice = parseFloat(select.options[select.selectedIndex].dataset.preco);
 
-        // Verificar se o produto já foi adicionado
-        var produtoExistente = produtosSelecionados.find(function (produto) {
-            return produto.id === selectedProductId;
-        });
+        // Criar um objeto representando o produto selecionado
+        var produto = {
+            id: selectedProductId,
+            nome: selectedProductName,
+            quantidade: parseInt(quantidade),
+            preco: selectedProductPrice
+        };
 
-        // Se o produto já foi adicionado, apenas atualize a quantidade
-        if (produtoExistente) {
-            produtoExistente.quantidade += parseInt(quantidade);
-        } else {
-            // Adicionar o produto à lista de produtos selecionados
-            produtosSelecionados.push({
-                id: selectedProductId,
-                nome: selectedProductName,
-                quantidade: parseInt(quantidade),
-                preco: selectedProductPrice
-            });
-        }
+        // Adicionar o produto à lista de produtos selecionados
+        produtosSelecionados.push(produto);
 
         // Atualizar a lista de produtos na view
         updateProdutoList();
 
         // Fechar o modal
         closeModal();
+
+        // Atualizar o valor total na view
+        updateValorTotal();
+
+        // Adicionar o produto ao formulário para que seja enviado ao backend
+        addProdutoToForm(produto);
     });
+
+    // Função para adicionar o produto selecionado ao formulário
+    function addProdutoToForm(produto) {
+        // Criar um elemento de input oculto para cada atributo do produto
+        var form = document.getElementById('form-servico');
+        var inputId = document.createElement('input');
+        inputId.type = 'hidden';
+        inputId.name = 'id_produto[]'; // Use um array para permitir vários produtos
+        inputId.value = produto.id;
+        form.appendChild(inputId);
+
+        var inputQuantidade = document.createElement('input');
+        inputQuantidade.type = 'hidden';
+        inputQuantidade.name = 'quantidade[]'; // Use um array para permitir várias quantidades
+        inputQuantidade.value = produto.quantidade;
+        form.appendChild(inputQuantidade);
+    }
 
     // Função para abrir o modal
     function openModal() {

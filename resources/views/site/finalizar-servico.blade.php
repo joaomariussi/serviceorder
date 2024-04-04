@@ -1,7 +1,8 @@
 @extends('site._partials.basic')
 
-<link rel="stylesheet" href="{{ asset('css/home.css') }}">
-<link rel="stylesheet" href="{{ asset('css/finalizar-servico.css') }}">
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/finalizar-servico.css') }}">
+@endpush
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,19 +15,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 @section('conteudo')
-    <nav>
-        <a href="{{ route('site.home') }}">Início</a>
-        <a href="{{ route('site.servico') }}">Serviços</a>
-        <a href="#">Contato</a>
-        <a href="{{ route('logout') }}">Sair</a>
-    </nav>
+    @include('site._partials.header')
     <body>
     <div class="container-servico">
         <h1>Cadastro de Ordem de Serviço</h1>
         <form class="form-servico" action="{{ route('site.finalizar-servico') }}" method="post" id="form-servico">
             @csrf
             <div class="form-group">
-                <button type="button" id="openModal">Selecionar Produtos</button>
+                <button type="button" id="openModal" class="button-open-modal">Selecionar Produtos</button>
             </div>
 
             <!-- Div para exibir os produtos selecionados -->
@@ -46,12 +42,12 @@
                        name="valor_total" data-thousands="." data-decimal="," placeholder="R$ 0,00" required>
             </div>
 
-            <button type="submit" class="botao-finalizar">Finalizar Serviço</button>
+            <button type="submit" class="button-finalizar">Finalizar Serviço</button>
         </form>
 
         <div class="botoes-navegacao">
             <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
-                    class="botao-voltar">Voltar
+                    class="button-voltar">Voltar
             </button>
         </div>
     </div>
@@ -60,10 +56,10 @@
     <!-- Modal para selecionar produtos -->
     <div id="myModal" class="modal-servico">
         <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
+            <span class="close-modal" id="closeModal">&times;</span>
             <select class="select-servico" id="produtos-list"></select>
             <input class="label-script" type="number" id="quantidade" placeholder="Quantidade" min="1">
-            <button id="adicionarProduto">Adicionar</button>
+            <button id="adicionarProduto" class="button-add-modal">Adicionar</button>
             <button class="button-cancelar" id="cancelar">Cancelar</button>
         </div>
     </div>
