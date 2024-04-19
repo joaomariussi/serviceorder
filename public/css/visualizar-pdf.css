@@ -1,0 +1,50 @@
+.section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-cliente,
+.info-carro,
+.info-servico {
+    margin-bottom: 20px;
+}
+
+.info-cliente h2,
+.info-carro h2,
+.info-servico h2 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.btn-imprimir {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-imprimir:hover {
+    background-color: #0056b3;
+}
