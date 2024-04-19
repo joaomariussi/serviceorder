@@ -9,12 +9,17 @@
     <body>
     <div class="container-servico">
         <h1>Cadastro de Ordem de Serviço</h1>
-        <form class="form-servico" action="{{ route('site.finalizar-servico') }}"
+        @if(session('success'))
+            <div class="alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form class="form-servico" action="{{ route('site.criar-servico') }}"
               method="post" onsubmit="return validarFormulario()">
             @csrf
             <div class="form-group">
-                <label class="label-servico" for="cliente">Cliente:</label>
-                <select name="id_cliente" id="cliente" required>
+                <label class="label-servico" for="id_cliente">Cliente:</label>
+                <select name="id_cliente" id="id_cliente" required>
                     <option disabled selected>Selecione um Cliente</option>
                     @foreach($clientes as $cliente)
                         <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>

@@ -1,5 +1,9 @@
 @extends('site._partials.basic')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endpush
+
 @section('conteudo')
     @include('site._partials.header')
     <div class="container-basic">
@@ -10,6 +14,8 @@
             veículo em perfeitas condições.
             Utilize nosso serviço de ordem para agendar um horário e garantir um atendimento rápido e eficiente.
         </p>
-        <a href="{{ route('site.servico') }}" class="button">Iniciar Serviço</a>
+        <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
+                class="button-iniciar">Iniciar Serviço
+        </button>
     </div>
 @endsection

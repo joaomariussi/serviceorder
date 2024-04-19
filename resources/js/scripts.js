@@ -44,38 +44,49 @@ document.addEventListener('DOMContentLoaded', function () {
             preco: selectedProductPrice
         };
 
-        // Adicionar o produto à lista de produtos selecionados
+        // Adiciona o produto à lista de produtos selecionados
         produtosSelecionados.push(produto);
 
-        // Atualizar a lista de produtos na view
+        // Atualiza a lista de produtos na view
         updateProdutoList();
 
-        // Fechar o modal
+        // Fecha o modal
         closeModal();
 
-        // Atualizar o valor total na view
+        // Atualiza o valor total na view
         updateValorTotal();
 
-        // Adicionar o produto ao formulário para que seja enviado ao backend
+        // / Adiciona o produto ao array de produtos selecionados
+        produtosSelecionados.push(produto)
+
+        // Adiciona o produto ao formulário para que seja enviado ao backend
         addProdutoToForm(produto);
     });
 
     // Função para adicionar o produto selecionado ao formulário
     function addProdutoToForm(produto) {
-        // Criar um elemento de input oculto para cada atributo do produto
+        // Cria um elemento de input oculto para cada atributo do produto
         var form = document.getElementById('form-servico');
+
         var inputId = document.createElement('input');
         inputId.type = 'hidden';
-        inputId.name = 'id_produto[]'; // Use um array para permitir vários produtos
+        inputId.name = 'produtos[' + produto.id + '][id_produto]'; // Nome do input usando notação de array
         inputId.value = produto.id;
         form.appendChild(inputId);
 
+        var inputValorProduto = document.createElement('input');
+        inputValorProduto.type = 'hidden';
+        inputValorProduto.name = 'produtos[' + produto.id + '][valor_produto]'; // Nome do input usando notação de array
+        inputValorProduto.value = produto.preco; // Aqui estou assumindo que 'preco' é o atributo que armazena o valor do produto
+        form.appendChild(inputValorProduto);
+
         var inputQuantidade = document.createElement('input');
         inputQuantidade.type = 'hidden';
-        inputQuantidade.name = 'quantidade[]'; // Use um array para permitir várias quantidades
+        inputQuantidade.name = 'produtos[' + produto.id + '][quantidade]'; // Nome do input usando notação de array
         inputQuantidade.value = produto.quantidade;
         form.appendChild(inputQuantidade);
     }
+
 
     // Função para abrir o modal
     function openModal() {
@@ -106,11 +117,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para fechar o modal
     function closeModal() {
-        var modal = document.getElementById('myModal');
-        modal.style.display = 'none';
+        document.getElementById('myModal').style.display = 'none';
     }
 
-    // Função para atualizar a lista de produtos na view
     // Função para atualizar a lista de produtos na view
     function updateProdutoList() {
         // Limpar a lista de produtos na view
@@ -149,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Adicionar um botão para remover o produto da lista
                 var removerButton = document.createElement('button');
                 removerButton.textContent = 'Remover';
-                removerButton.classList.add('botao-remover');
+                removerButton.classList.add('button-remover-produto');
                 removerButton.dataset.id = produto.id; // Adiciona o ID do produto como um atributo personalizado
                 removerButton.addEventListener('click', function () {
                     // Obter o ID do produto a ser removido
@@ -177,20 +186,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para atualizar o valor total na view
     function updateValorTotal() {
-        var valorTotalInput = document.getElementById('valor_total');
-        var valorTotal = 0;
+        var valorProdutosInput = document.getElementById('valor_produto');
+        var valorTotalProdutos = 0;
 
         // Calcular o valor total com base nos produtos selecionados
         produtosSelecionados.forEach(function (produto) {
-            valorTotal += produto.preco * produto.quantidade;
+            valorTotalProdutos += produto.preco * produto.quantidade;
         });
 
-        // Atualizar o valor total no input
-        valorTotalInput.value = valorTotal.toFixed(2);
+        // Atualizar o valor total dos produtos no input
+        valorProdutosInput.value = 'R$ ' + valorTotalProdutos.toFixed(2);
+
+        // Obter o valor da mão de obra
+        var valorMaoObraInput = document.getElementById('valor_mao_obra');
+        var valorMaoObra = parseFloat(valorMaoObraInput.value.replace('R$ ', '').replace(',', '.'));
+
+        // Verificar se o valor da mão de obra é um número válido
+        if (!isNaN(valorMaoObra)) {
+            // Adicionar o valor da mão de obra ao valor total dos produtos
+            var valorTotal = valorTotalProdutos + valorMaoObra;
+
+            // Atualizar o valor total no formulário
+            var valorTotalForm = document.getElementById('valor_total');
+            valorTotalForm.value = 'R$ ' + valorTotal.toFixed(2);
+        }
+
+        // Ouvinte de evento para o campo valor_mao_obra
+        var valorMaoObraInput = document.getElementById('valor_mao_obra');
+        valorMaoObraInput.addEventListener('blur', function () {
+            updateValorTotal();
+        });
     }
 
     // Máscara para o input de valor da mão de obra
     $('#valor_mao_obra').maskMoney({
+        prefix: 'R$ ',    // Prefixo do cifrão
+        allowNegative: false,  // Não permite valores negativos
+        thousands: '.',  // Separador de milhares
+        decimal: ',',    // Separador decimal
+        affixesStay: true // Mantém o cifrão na frente do valor mesmo quando estiver vazio
+    });
+
+    // Máscara para o input de valor dos produtos
+    $('#valor_produto').maskMoney({
         prefix: 'R$ ',    // Prefixo do cifrão
         allowNegative: false,  // Não permite valores negativos
         thousands: '.',  // Separador de milhares
