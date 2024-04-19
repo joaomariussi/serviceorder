@@ -1,0 +1,13 @@
+.button-iniciar {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.container-basic {
+    margin-top: 20px;
+}

@@ -3,7 +3,7 @@
 @endpush
 <header class="admin-header">
     <div class="container-basic">
-        <h1 class="header-title">Serviço de Ordem - Mecânica XYZ</h1>
+        <h1 class="header-title">Service Order</h1>
         <div class="form-group">
             @if(Auth::check())
                 <p class="name-user">Olá, {{ $user->nome }}</p>
