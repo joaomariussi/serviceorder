@@ -56,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Atualiza o valor total na view
         updateValorTotal();
 
-        // / Adiciona o produto ao array de produtos selecionados
-        produtosSelecionados.push(produto)
+        // Limpa o campo de quantidade para que o usuário possa selecionar outra quantidade
+        quantidadeInput.value = '';
 
-        // Adiciona o produto ao formulário para que seja enviado ao backend
+        // Adiciona o produto ao formulário
         addProdutoToForm(produto);
     });
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var modal = document.getElementById('myModal');
         modal.style.display = 'block';
 
-        // Fazer uma solicitação AJAX para obter os produtos
+        // Faz uma solicitação AJAX para obter os produtos
         fetch('/produtos')
             .then(response => response.json())
             .then(data => {
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var select = document.getElementById('produtos-list');
                 select.innerHTML = '';
 
-                // Preencher o select com os produtos retornados
+                // Preenche o select com os produtos retornados
                 data.forEach(function (produto) {
                     var option = document.createElement('option');
                     option.text = produto.nome; // Supondo que 'nome' seja o campo que contém o nome do produto

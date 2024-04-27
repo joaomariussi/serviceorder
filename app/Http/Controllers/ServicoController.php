@@ -9,9 +9,7 @@ use App\Models\ServicosProdutosModel;
 use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Throwable;
 
@@ -148,7 +146,7 @@ class ServicoController extends Controller
             foreach ($dadosServico['produtos'] as &$produto) {
                 foreach ($produtosDetalhes as $produtoDetalhe) {
                     if ($produto['id_produto'] == $produtoDetalhe->id) {
-                        $produto['nome_produto'] = $produtoDetalhe->nome;
+                        $produto['nome'] = $produtoDetalhe->nome;
                         // Adicione outros detalhes do produto conforme necessário
                         break;
                     }
@@ -159,6 +157,60 @@ class ServicoController extends Controller
             return view('site.visualizar-pdf', compact('dadosServico', 'cliente'));
         } catch (Throwable $e) {
             return redirect()->back()->with('error', 'Erro ao gerar PDF: ' . $e->getMessage());
+        }
+    }
+
+    public function exportarPdf(Request $request)
+    {
+        try {
+            // Recupere os dados do serviço da sessão se não forem passados como parâmetro
+            $dadosServico = $request->get('dados_servico');
+
+            // Recupere o cliente associado ao serviço
+            $cliente = ClientesModel::find($dadosServico['id_cliente']);
+
+            // Verifique se o cliente foi encontrado com sucesso
+            if (!$cliente) {
+                throw new \Exception('Cliente não encontrado.');
+            }
+
+            // Verifique se os produtos estão presentes nos dados do serviço
+            if (!isset($dadosServico['produtos'])) {
+                throw new \Exception('Produtos não encontrados nos dados do serviço.');
+            }
+
+            // Recupere os IDs dos produtos do serviço
+            $produtosIds = array_column($dadosServico['produtos'], 'id_produto');
+
+            // Busque os detalhes dos produtos com base nos IDs
+            $produtosDetalhes = ProdutosModel::whereIn('id', $produtosIds)->get();
+
+            // Combine os detalhes dos produtos com os dados do serviço
+            foreach ($dadosServico['produtos'] as &$produto) {
+                foreach ($produtosDetalhes as $produtoDetalhe) {
+                    if ($produto['id_produto'] == $produtoDetalhe->id) {
+                        $produto['nome'] = $produtoDetalhe->nome;
+                        // Adicione outros detalhes do produto conforme necessário
+                        break;
+                    }
+                }
+            }
+
+            // Crie uma nova instância do Dompdf
+            $dompdf = new Dompdf();
+
+            // Renderize a visualização da página do PDF
+            $dompdf->loadHtml(View::make('site.exportar-pdf',
+                compact('dadosServico', 'cliente'))->render());
+
+            // Renderize o PDF
+            $dompdf->render();
+
+            // Envie o PDF para o navegador
+            return $dompdf->stream('exportar-pdf');
+
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao exportar PDF: ' . $e->getMessage());
         }
     }
 }

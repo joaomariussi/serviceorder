@@ -21,6 +21,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/servico', [ServicoController::class, 'criarServico'])->name('site.criar-servico')->middleware('auth');
     Route::any('/finalizar-servico', [ServicoController::class, 'finalizarServico'])->name('site.finalizar-servico')->middleware('auth');
     Route::get('/servico-pdf', [ServicoController::class, 'gerarPdf'])->name('site.servico-pdf')->middleware('auth');
+    Route::get('/exportar-pdf', [ServicoController::class, 'exportarPdf'])->name('site.exportar-pdf')->middleware('auth');
 
     Route::get('/produtos', [ServicoController::class, 'buscarProdutos'])->name('produtos.listar');
 });
