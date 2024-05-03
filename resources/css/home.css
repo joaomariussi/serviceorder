@@ -8,6 +8,7 @@
     font-size: 15px;
 }
 
-.container-basic {
-    margin-top: 20px;
+.container-home {
+    max-width: 400px;
+    margin: 10px auto;
 }

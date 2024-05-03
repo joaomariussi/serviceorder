@@ -6,7 +6,7 @@
 
 @section('conteudo')
     @include('site._partials.header')
-    <div class="container-basic">
+    <div class="container-home">
         <h2>Bem-vindo ao Serviço de Ordem da Mecânica XYZ</h2>
         <p>
             Aqui na Mecânica XYZ, oferecemos uma ampla gama de serviços de reparo e manutenção automotiva.
@@ -15,7 +15,8 @@
             Utilize nosso serviço de ordem para agendar um horário e garantir um atendimento rápido e eficiente.
         </p>
         <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
-                class="button-iniciar">Iniciar Serviço
+                class="button-iniciar">
+            Iniciar Serviço
         </button>
     </div>
 @endsection

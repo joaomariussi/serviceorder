@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServicoController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::any('/finalizar-servico', [ServicoController::class, 'finalizarServico'])->name('site.finalizar-servico')->middleware('auth');
     Route::get('/servico-pdf', [ServicoController::class, 'gerarPdf'])->name('site.servico-pdf')->middleware('auth');
     Route::get('/exportar-pdf', [ServicoController::class, 'exportarPdf'])->name('site.exportar-pdf')->middleware('auth');
+
+    Route::get('/clientes', [ClienteController::class, 'index'])->name('site.cliente.index')->middleware('auth');
 
     Route::get('/produtos', [ServicoController::class, 'buscarProdutos'])->name('produtos.listar');
 });
