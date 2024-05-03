@@ -12,7 +12,7 @@
     <div class="section-logo">
         <div class="logo-content">
             <div class="image-logo">
-                <img src="images/mecanico.png">
+                <img src="images/logo.png">
             </div>
         </div>
         <div class="text-content">

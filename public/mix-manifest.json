@@ -1,6 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/app.js.LICENSE.txt": "/js/app.js.LICENSE.txt",
+    "/js/bootstrap.js": "/js/bootstrap.js",
     "/js/scripts.js": "/js/scripts.js",
+    "/js/table-cliente.js": "/js/table-cliente.js",
+    "/css/cliente.css": "/css/cliente.css",
     "/css/finalizar-servico.css": "/css/finalizar-servico.css",
     "/css/footer.css": "/css/footer.css",
     "/css/header.css": "/css/header.css",

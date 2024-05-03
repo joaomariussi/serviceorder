@@ -9,6 +9,7 @@ use App\Models\ServicosProdutosModel;
 use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Throwable;
@@ -128,12 +129,12 @@ class ServicoController extends Controller
 
             // Verifique se o cliente foi encontrado com sucesso
             if (!$cliente) {
-                throw new \Exception('Cliente não encontrado.');
+                throw new Exception('Cliente não encontrado.');
             }
 
             // Verifique se os produtos estão presentes nos dados do serviço
             if (!isset($dadosServico['produtos'])) {
-                throw new \Exception('Produtos não encontrados nos dados do serviço.');
+                throw new Exception('Produtos não encontrados nos dados do serviço.');
             }
 
             // Recupere os IDs dos produtos do serviço
@@ -160,7 +161,7 @@ class ServicoController extends Controller
         }
     }
 
-    public function exportarPdf(Request $request)
+    public function exportarPdf(Request $request): ?RedirectResponse
     {
         try {
             // Recupere os dados do serviço da sessão se não forem passados como parâmetro
@@ -171,12 +172,12 @@ class ServicoController extends Controller
 
             // Verifique se o cliente foi encontrado com sucesso
             if (!$cliente) {
-                throw new \Exception('Cliente não encontrado.');
+                throw new Exception('Cliente não encontrado.');
             }
 
             // Verifique se os produtos estão presentes nos dados do serviço
             if (!isset($dadosServico['produtos'])) {
-                throw new \Exception('Produtos não encontrados nos dados do serviço.');
+                throw new Exception('Produtos não encontrados nos dados do serviço.');
             }
 
             // Recupere os IDs dos produtos do serviço

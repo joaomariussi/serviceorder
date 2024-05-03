@@ -27,7 +27,7 @@
                 </select>
             </div>
 
-            <div class="carro-cliente">
+            <div class="servico">
                 <div class="form-group">
                     <label class="label-servico" for="nome_carro">Carro:</label>
                     <input class="input-carro" type="text" id="nome_carro" name="nome_carro" placeholder="Nome do seu Carro" required>
