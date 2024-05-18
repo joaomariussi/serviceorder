@@ -5,7 +5,6 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
     left: 345px; /* Largura do .sidebar */
     top: 23%;
 }
@@ -86,12 +85,13 @@ select:invalid {
 }
 
 .button-avancar {
-    padding: 10px 23px;
+    padding: 10px 25px;
     color: #fff;
     background-color: #1220ff;
-    border-color: #1220ff;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
+    text-align: center; /* Centraliza o texto dentro do botão */
     float: right; /* Move o botão para o canto direito */
 }
 
@@ -100,12 +100,14 @@ select:invalid {
 }
 
 .button-voltar {
-    padding: 10px 20px;
+    padding: 10px 25px;
     color: #fff;
     background-color: #6c757d;
-    border-color: #6c757d;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
+    text-align: center; /* Centraliza o texto dentro do botão */
+    float: left; /* Move o botão para o canto esquerdo */
 }
 
 .button-voltar:hover {
@@ -114,7 +116,12 @@ select:invalid {
 }
 
 .botoes-navegacao {
-    margin-top: 20px;
+    overflow: auto; /* Adiciona clearfix para evitar problemas de layout com floats */
+}
+
+.main-content {
+    margin-left: 220px;
+    padding: 20px;
 }
 
 

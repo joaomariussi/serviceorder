@@ -6,98 +6,100 @@
 
 @section('conteudo')
     @include('site._partials.header')
-    <body>
-    <div class="container-servico">
-        <h1>Cadastro de Ordem de Serviço</h1>
-        @if(session('success'))
-            <div class="alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        <form class="form-servico" action="{{ route('site.criar-servico') }}"
-              method="post" onsubmit="return validarFormulario()">
-            @csrf
-            <div class="form-group">
-                <label class="label-servico" for="id_cliente">Cliente:</label>
-                <select name="id_cliente" id="id_cliente" required>
-                    <option disabled selected>Selecione um Cliente</option>
-                    @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
-                    @endforeach
-                </select>
-            </div>
 
-            <div class="servico">
-                <div class="form-group">
-                    <label class="label-servico" for="nome_carro">Carro:</label>
-                    <input class="input-carro" type="text" id="nome_carro" name="nome_carro" placeholder="Nome do seu Carro" required>
+    <div class="main-content">
+        <div class="container-servico">
+            <h1>Cadastro de Ordem de Serviço</h1>
+            @if(session('success'))
+                <div class="alert-success">
+                    {{ session('success') }}
                 </div>
-
+            @endif
+            <form class="form-servico" action="{{ route('site.criar-servico') }}"
+                  method="post" onsubmit="return validarFormulario()">
+                @csrf
                 <div class="form-group">
-                    <label class="label-servico" for="marca">Marca:</label>
-                    <select name="marca" id="marca">
-                        <option disabled selected>Selecione uma marca de Carro</option>
-                        <option value="Chevrolet">Chevrolet</option>
-                        <option value="Fiat">Fiat</option>
-                        <option value="Ford">Ford</option>
-                        <option value="Volkswagen">Volkswagen</option>
-                        <option value="Renault">Renault</option>
-                        <option value="Toyota">Toyota</option>
-                        <option value="Hyundai">Hyundai</option>
-                        <option value="Honda">Honda</option>
-                        <option value="Nissan">Nissan</option>
-                        <option value="Peugeot">Peugeot</option>
-                        <option value="Citroën">Citroën</option>
-                        <option value="Mitsubishi">Mitsubishi</option>
-                        <option value="Mercedes-Benz">Mercedes-Benz</option>
-                        <option value="BMW">BMW</option>
-                        <option value="Audi">Audi</option>
-                        <option value="Kia">Kia</option>
-                        <option value="Land Rover">Land Rover</option>
-                        <option value="Jeep">Jeep</option>
-                        <option value="Volvo">Volvo</option>
-                        <option value="JAC">JAC</option>
-                        <option value="Chery">Chery</option>
-                        <option value="Subaru">Subaru</option>
-                        <option value="Lifan">Lifan</option>
-                        <option value="Troller">Troller</option>
-                        <option value="RAM">RAM</option>
-                        <option value="Lexus">Lexus</option>
-                        <option value="Suzuki">Suzuki</option>
+                    <label class="label-servico" for="id_cliente">Cliente:</label>
+                    <select name="id_cliente" id="id_cliente" required>
+                        <option disabled selected>Selecione um Cliente</option>
+                        @foreach($clientes as $cliente)
+                            <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                        @endforeach
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label class="label-servico" for="modelo">Modelo:</label>
-                    <select name="modelo" id="modelo" required>
-                        <option disabled selected>Selecione um modelo de Carro</option>
-                        <option value="Hatch">Hatch</option>
-                        <option value="Sedan">Sedan</option>
-                        <option value="SUV">SUV</option>
-                    </select>
-                </div>
+                <div class="servico">
+                    <div class="form-group">
+                        <label class="label-servico" for="nome_carro">Carro:</label>
+                        <input class="input-carro" type="text" id="nome_carro" name="nome_carro" placeholder="Nome do seu Carro" required>
+                    </div>
 
-                <div class="form-group">
-                    <label class="label-servico" for="ano">Ano:</label>
-                    <input class="input-number-servico" step="any" type="number" id="ano" name="ano"
-                           placeholder="Ano do seu Carro" required>
-                </div>
+                    <div class="form-group">
+                        <label class="label-servico" for="marca">Marca:</label>
+                        <select name="marca" id="marca">
+                            <option disabled selected>Selecione uma marca de Carro</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Fiat">Fiat</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            <option value="Renault">Renault</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Peugeot">Peugeot</option>
+                            <option value="Citroën">Citroën</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Kia">Kia</option>
+                            <option value="Land Rover">Land Rover</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="Volvo">Volvo</option>
+                            <option value="JAC">JAC</option>
+                            <option value="Chery">Chery</option>
+                            <option value="Subaru">Subaru</option>
+                            <option value="Lifan">Lifan</option>
+                            <option value="Troller">Troller</option>
+                            <option value="RAM">RAM</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Suzuki">Suzuki</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label class="label-servico" for="placa">Placa:</label>
-                    <input class="input_placa" type="text" id="placa" name="placa" placeholder="Placa do seu Carro" required>
+                    <div class="form-group">
+                        <label class="label-servico" for="modelo">Modelo:</label>
+                        <select name="modelo" id="modelo" required>
+                            <option disabled selected>Selecione um modelo de Carro</option>
+                            <option value="Hatch">Hatch</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-servico" for="ano">Ano:</label>
+                        <input class="input-number-servico" step="any" type="number" id="ano" name="ano"
+                               placeholder="Ano do seu Carro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-servico" for="placa">Placa:</label>
+                        <input class="input_placa" type="text" id="placa" name="placa"
+                               placeholder="Placa do seu Carro" required>
+                    </div>
                 </div>
+                <button type="submit" class="button-avancar">Avançar</button>
+            </form>
+
+            <div class="botoes-navegacao">
+                <button type="button" onclick="window.location.href='{{ route('site.home') }}'"
+                        class="button-voltar">Voltar para Home
+                </button>
             </div>
-            <button type="submit" class="button-avancar">Avançar</button>
-        </form>
-
-        <div class="botoes-navegacao">
-            <button type="button" onclick="window.location.href='{{ route('site.home') }}'"
-                    class="button-voltar">Voltar para Home
-            </button>
         </div>
     </div>
-    </body>
 
     <script>
         function validarFormulario() {

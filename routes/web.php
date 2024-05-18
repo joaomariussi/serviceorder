@@ -24,6 +24,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/servico-pdf', [ServicoController::class, 'gerarPdf'])->name('site.servico-pdf')->middleware('auth');
     Route::get('/exportar-pdf', [ServicoController::class, 'exportarPdf'])->name('site.exportar-pdf')->middleware('auth');
 
+    // Adicionando a rota para a view de sucesso
+    Route::get('/servico-finalizado', [ServicoController::class, 'servicoFinalizado'])->name('site.servico-finalizado')->middleware('auth');
+
     Route::get('/clientes', [ClienteController::class, 'index'])->name('site.cliente.index')->middleware('auth');
 
     Route::get('/produtos', [ServicoController::class, 'buscarProdutos'])->name('produtos.listar');

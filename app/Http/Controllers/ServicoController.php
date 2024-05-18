@@ -52,15 +52,20 @@ class ServicoController extends Controller
                     'Erro ao finalizar serviço: Dados do serviço não encontrados na sessão.');
             }
 
-            $dadosServico = $request->session()->get('dados_servico');
+            // Recupera os dados do serviço da sessão
+            $dados_servico = $request->session()->get('dados_servico');
 
-            $dadosServico = array_merge($dadosServico, $request->all());
+            // Recupera os dados do formulário
+            $dados_view = $request->all();
+
+            // Combina os dados do serviço com os dados do formulário
+            $dados_completo = array_merge($dados_servico, $dados_view);
 
             // Remove o prefixo "R$ " do valor total do serviço antes de salvar
-            $dadosServico['valor_total'] = str_replace('R$ ', '', $dadosServico['valor_total']);
+            $dados_completo['valor_total'] = str_replace('R$ ', '', $dados_completo['valor_total']);
 
             // Remover o prefixo "R$ " do valor da mão de obra antes de salvar
-            $valor_mao_obra = str_replace('R$ ', '', $dadosServico['valor_mao_obra']);
+            $valor_mao_obra = str_replace('R$ ', '', $dados_completo['valor_mao_obra']);
             // Remover possíveis separadores de milhares (pontos)
             $valor_mao_obra = str_replace('.', '', $valor_mao_obra);
             // Substituir a vírgula decimal por ponto
@@ -68,20 +73,20 @@ class ServicoController extends Controller
 
             // Salva o serviço
             $servico = new ServicoModel();
-            $servico->id_cliente = $dadosServico['id_cliente'] ?? null;
-            $servico->nome_carro = $dadosServico['nome_carro'] ?? null;
-            $servico->marca = $dadosServico['marca'] ?? null;
-            $servico->modelo = $dadosServico['modelo'] ?? null;
-            $servico->ano = $dadosServico['ano'] ?? null;
-            $servico->placa = $dadosServico['placa'] ?? null;
+            $servico->id_cliente = $dados_completo['id_cliente'] ?? null;
+            $servico->nome_carro = $dados_completo['nome_carro'] ?? null;
+            $servico->marca = $dados_completo['marca'] ?? null;
+            $servico->modelo = $dados_completo['modelo'] ?? null;
+            $servico->ano = $dados_completo['ano'] ?? null;
+            $servico->placa = $dados_completo['placa'] ?? null;
             $servico->valor_mao_obra = (float) $valor_mao_obra;
-            $servico->valor_total = $dadosServico['valor_total'];
+            $servico->valor_total = $dados_completo['valor_total'];
             $servico->save();
 
-            foreach ($dadosServico['produtos'] as $produto) {
+            foreach ($dados_completo['produtos'] as $produto) {
                 $servicoProduto = new ServicosProdutosModel();
                 $servicoProduto->id_servico = $servico->id;
-                $servicoProduto->id_cliente = $dadosServico['id_cliente'];
+                $servicoProduto->id_cliente = $dados_completo['id_cliente'];
                 $servicoProduto->id_produto = $produto['id_produto'];
 
                 // Remover o prefixo "R$ " do valor do produto antes de salvar
@@ -95,7 +100,11 @@ class ServicoController extends Controller
                 $servicoProduto->quantidade = $produto['quantidade'];
                 $servicoProduto->save();
             }
-            return redirect()->route('site.servico-pdf', ['dados_servico' => $dadosServico]);
+
+            // Armazena os dados completos na sessão
+            $request->session()->put('dados_completo', $dados_completo);
+
+            return redirect()->route('site.servico-finalizado');
 
         } catch (Throwable $e) {
             return view('site.servico', compact('clientes'))->
@@ -103,18 +112,20 @@ class ServicoController extends Controller
         }
     }
 
-    public function buscarProdutos(Request $request): JsonResponse
+    public function servicoFinalizado(Request $request)
     {
         try {
-            $query = $request->input('query');
+            // Recupera os dados do serviço da sessão
+            $dados_completo = $request->session()->get('dados_completo');
 
-            // Lógica para buscar produtos com base na consulta do usuário
-            $produtos = ProdutosModel::where('nome', 'like', '%' . $query . '%')->get();
+            // Verifica se os dados do serviço estão presentes na sessão
+            if (!$dados_completo) {
+                return redirect()->route('site.servico')->with('error', 'Erro ao exibir sucesso: Dados do serviço não encontrados.');
+            }
 
-            // Retorna os resultados da busca como um array JSON
-            return response()->json($produtos);
+            return view('site.servico-finalizado', compact('dados_completo'));
         } catch (Throwable $e) {
-            return response()->json(['error' => 'Erro ao buscar produtos: ' . $e->getMessage()]);
+            return redirect()->route('site.servico')->with('error', 'Erro ao exibir sucesso: ' . $e->getMessage());
         }
     }
 
@@ -122,10 +133,10 @@ class ServicoController extends Controller
     {
         try {
             // Recupere os dados do serviço da sessão se não forem passados como parâmetro
-            $dadosServico = $request->get('dados_servico');
+            $dados_completo = $request->session()->get('dados_completo');
 
             // Recupere o cliente associado ao serviço
-            $cliente = ClientesModel::find($dadosServico['id_cliente']);
+            $cliente = ClientesModel::find($dados_completo['id_cliente']);
 
             // Verifique se o cliente foi encontrado com sucesso
             if (!$cliente) {
@@ -133,18 +144,18 @@ class ServicoController extends Controller
             }
 
             // Verifique se os produtos estão presentes nos dados do serviço
-            if (!isset($dadosServico['produtos'])) {
+            if (!isset($dados_completo['produtos'])) {
                 throw new Exception('Produtos não encontrados nos dados do serviço.');
             }
 
             // Recupere os IDs dos produtos do serviço
-            $produtosIds = array_column($dadosServico['produtos'], 'id_produto');
+            $produtosIds = array_column($dados_completo['produtos'], 'id_produto');
 
             // Busque os detalhes dos produtos com base nos IDs
             $produtosDetalhes = ProdutosModel::whereIn('id', $produtosIds)->get();
 
             // Combine os detalhes dos produtos com os dados do serviço
-            foreach ($dadosServico['produtos'] as &$produto) {
+            foreach ($dados_completo['produtos'] as &$produto) {
                 foreach ($produtosDetalhes as $produtoDetalhe) {
                     if ($produto['id_produto'] == $produtoDetalhe->id) {
                         $produto['nome'] = $produtoDetalhe->nome;
@@ -155,8 +166,9 @@ class ServicoController extends Controller
             }
 
             // Retorne a visualização da página do PDF
-            return view('site.visualizar-pdf', compact('dadosServico', 'cliente'));
+            return view('site.visualizar-pdf', compact('dados_completo', 'cliente'));
         } catch (Throwable $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Erro ao gerar PDF: ' . $e->getMessage());
         }
     }
@@ -212,6 +224,21 @@ class ServicoController extends Controller
 
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao exportar PDF: ' . $e->getMessage());
+        }
+    }
+
+    public function buscarProdutos(Request $request): JsonResponse
+    {
+        try {
+            $query = $request->input('query');
+
+            // Lógica para buscar produtos com base na consulta do usuário
+            $produtos = ProdutosModel::where('nome', 'like', '%' . $query . '%')->get();
+
+            // Retorna os resultados da busca como um array JSON
+            return response()->json($produtos);
+        } catch (Throwable $e) {
+            return response()->json(['error' => 'Erro ao buscar produtos: ' . $e->getMessage()]);
         }
     }
 }
