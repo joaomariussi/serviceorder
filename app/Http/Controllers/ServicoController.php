@@ -168,7 +168,6 @@ class ServicoController extends Controller
             // Retorne a visualização da página do PDF
             return view('site.visualizar-pdf', compact('dados_completo', 'cliente'));
         } catch (Throwable $e) {
-            dd($e->getMessage());
             return redirect()->back()->with('error', 'Erro ao gerar PDF: ' . $e->getMessage());
         }
     }
