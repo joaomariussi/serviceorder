@@ -5,7 +5,6 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
     left: 345px; /* Largura do .sidebar */
     top: 23%;
 }
@@ -63,10 +62,10 @@ select:invalid {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close-modal:hover,
-
 .form-servico {
     width: auto;
 }
@@ -90,7 +89,7 @@ select:invalid {
     padding: 10px 25px;
     color: #fff;
     background-color: #1220ff;
-    border-color: #1220ff;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     float: right; /* Move o botão para o canto direito */
@@ -101,10 +100,10 @@ select:invalid {
 }
 
 .button-voltar {
-    padding: 10px 20px;
+    padding: 10px 30px;
     color: #fff;
     background-color: #6c757d;
-    border-color: #6c757d;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -149,10 +148,11 @@ select:invalid {
     margin: 5px 0 20px 0;
 }
 
-.label-script {
+.quantidade {
     display: flex;
     margin-bottom: 15px;
     border-radius: 3px;
+    border-color: #ccc;
     padding: 5px;
     width: 100px;
 }
@@ -166,9 +166,10 @@ select:invalid {
     padding: 10px 20px;
     color: #fff;
     background-color: #dc3545;
-    border-color: #dc3545;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 5px
 }
 
 .button-cancelar:hover {
@@ -179,7 +180,7 @@ select:invalid {
     padding: 10px 20px;
     color: #fff;
     background-color: #007bff;
-    border-color: #007bff;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -192,8 +193,8 @@ select:invalid {
     padding: 10px 20px;
     color: #fff;
     background-color: #28a745;
-    border-color: #28a745;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
 }
 
@@ -205,7 +206,7 @@ select:invalid {
     padding: 10px 20px;
     color: #fff;
     background-color: #dc3545;
-    border-color: #dc3545;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
@@ -214,3 +215,9 @@ select:invalid {
 .button-remover-produto:hover {
     background-color: #cc0000;
 }
+
+.main-content {
+    margin-left: 220px;
+    padding: 20px;
+}
+

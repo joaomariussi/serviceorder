@@ -16,7 +16,8 @@
 
 @section('conteudo')
     @include('site._partials.header')
-    <body>
+
+    <div class="main-content">
         <div class="container-servico">
             <h1>Cadastro de Ordem de Serviço</h1>
             <form class="form-servico" action="{{ route('site.finalizar-servico') }}" method="post" id="form-servico">
@@ -59,14 +60,14 @@
                 </div>
             </form>
         </div>
-    </body>
+    </div>
 
     <!-- Modal para selecionar produtos -->
     <div id="myModal" class="modal-servico">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <select class="select-servico" id="produtos-list"></select>
-            <input class="label-script" type="number" id="quantidade" placeholder="Quantidade" min="1">
+            <input class="quantidade" type="number" id="quantidade" placeholder="Quantidade" min="1">
             <button id="adicionarProduto" class="button-add-modal">Adicionar</button>
             <button class="button-cancelar" id="cancelar">Cancelar</button>
         </div>

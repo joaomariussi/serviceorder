@@ -5,28 +5,29 @@ body {
 
 /* Sidebar */
 .sidebar {
-    width: 180px;
+    width: 220px;
     height: 100%;
     position: fixed;
     background-color: #2c3e50;
     color: #fff;
     top: 0;
     left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    margin-top: 20px;
+    margin-left: 60px;
 }
 
 .menu {
-    margin: 40px 0 0 0;
-    padding: 0;
-    list-style: none;
+    margin-bottom: 10px;
 }
 
-.menu li {
-    position: relative;
-    border-bottom: 1px solid #34495e;
-}
-
-.menu li:last-child {
-    border-bottom: none;
+.menu li,
+.submenu ul li {
+    margin-bottom: 5px; /* Adiciona uma margem inferior para separar os itens */
 }
 
 .menu li a {
@@ -34,7 +35,7 @@ body {
     text-decoration: none;
     color: #fff;
     padding: 15px 25px;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 .menu li a:hover {
@@ -45,16 +46,18 @@ body {
     display: none;
 }
 
-.submenu:hover ul,
-.submenu ul:hover {
+.submenu:hover ul {
     display: block;
+    align-items: center;
 }
 
 .submenu ul li a {
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: #fff;
     display: block;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Impede a quebra de linha */
+    font-size: 14px; /* Tamanho da fonte */
 }
 
 .submenu ul li a:hover {
@@ -63,22 +66,12 @@ body {
 
 /* Header */
 .admin-header {
-    background-color: #3498db;
+    background-image: url('/images/banner.png');
+    background-size: cover;
+    background-position: center;
     color: #fff;
-    padding: 20px;
+    padding: 140px;
     text-align: center;
-}
-
-.header-title {
-    margin: 0;
-}
-
-.form-group-user {
-    margin-top: 10px;
-}
-
-.name-user {
-    margin: 0;
 }
 
 .wrapper {
@@ -92,6 +85,11 @@ body {
 .container-basic {
     margin-left: 70px;
     justify-content: center;
+}
+
+.logo-menu {
+    align-items: center;
+    display: flex;
 }
 
 

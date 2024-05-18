@@ -11,15 +11,12 @@
     @include('site._partials.header')
     <div class="conteudo-pagina">
 
-        <div class="titulo-cliente">
-            <h2>Clientes</h2>
-        </div>
-
         <div class="menu-cliente">
 
             <table id="clientes" class="display" style="width:100%">
                 <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">CPF</th>
@@ -30,10 +27,13 @@
                 <tbody>
                 @forelse ($clientes as $cliente)
                     <tr>
+                        <td>{{ $cliente->id }}</td>
                         <td>{{ $cliente->nome }}</td>
                         <td>{{ $cliente->email }}</td>
-                        <td>{{ $cliente->cpf }}</td>
-                        <td>{{ $cliente->telefone }}</td>
+                        <td>{{ substr($cliente->cpf, 0, 3) }}.{{ substr($cliente->cpf, 3, 3) }}.
+                            {{ substr($cliente->cpf, 6, 3) }}-{{ substr($cliente->cpf, -2) }}</td>
+                        <td>{{ substr($cliente->telefone, 0, 2) }} {{ substr($cliente->telefone, 2, 5) }}
+                            -{{ substr($cliente->telefone, -4) }}</td>
                         <td>
                             <form class="form-clientes" id="form-editar-fornecedor-{{ $cliente->id }}"
 {{--                                  action="{{ route('app.fornecedor.editar', ['id' => $cliente->id]) }}"--}}
@@ -169,9 +169,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script src="{{ asset('js/table-cliente.js') }}"></script>
-    <script>
-        // Adicione seu script JavaScript aqui
-    </script>
 @endpush
 
 

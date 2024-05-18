@@ -1,9 +1,8 @@
 .conteudo-pagina {
-    margin-top: 20px;
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 55px;
-    padding: 10px;
+    gap: 210px;
+    padding: 30px;
 }
 
 .titulo-cliente {
@@ -97,6 +96,7 @@
 .form-clientes {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
