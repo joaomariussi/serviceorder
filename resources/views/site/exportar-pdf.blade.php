@@ -87,11 +87,11 @@
 
 <div class="section">
     <h2>Dados do Carro</h2>
-    <p><strong>Carro:</strong> {{ $dadosServico['nome_carro'] }}</p>
-    <p><strong>Marca:</strong> {{ $dadosServico['marca'] }}</p>
-    <p><strong>Modelo:</strong> {{ $dadosServico['modelo'] }}</p>
-    <p><strong>Ano:</strong> {{ $dadosServico['ano'] }}</p>
-    <p><strong>Placa:</strong> {{ $dadosServico['placa'] }}</p>
+    <p><strong>Carro:</strong> {{ $dados_completo['nome_carro'] }}</p>
+    <p><strong>Marca:</strong> {{ $dados_completo['marca'] }}</p>
+    <p><strong>Modelo:</strong> {{ $dados_completo['modelo'] }}</p>
+    <p><strong>Ano:</strong> {{ $dados_completo['ano'] }}</p>
+    <p><strong>Placa:</strong> {{ $dados_completo['placa'] }}</p>
 </div>
 
 <div class="section">
@@ -106,7 +106,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($dadosServico['produtos'] as $produto)
+        @foreach ($dados_completo['produtos'] as $produto)
             <tr>
                 <td>{{ $produto['nome'] }}</td>
                 <td>{{ formatarValor($produto['valor_produto']) }}</td>
@@ -121,9 +121,9 @@
 <div class="section highlight">
     <h2>Orçamento</h2>
     <div class="orcamento-info">
-        <div><strong>Valor dos Produtos:</strong> {{ $dadosServico['valor_produto'] }}</div>
-        <div class="align-right"><strong>Valor da Mão de Obra:</strong> {{ $dadosServico['valor_mao_obra'] }}</div>
-        <div><strong>Valor Total do Serviço:</strong> R$ {{ $dadosServico['valor_total'] }}</div>
+        <div><strong>Valor dos Produtos:</strong> {{ $dados_completo['valor_produto'] }}</div>
+        <div class="align-right"><strong>Valor da Mão de Obra:</strong> {{ $dados_completo['valor_mao_obra'] }}</div>
+        <div><strong>Valor Total do Serviço:</strong> R$ {{ $dados_completo['valor_total'] }}</div>
     </div>
 </div>
 </body>

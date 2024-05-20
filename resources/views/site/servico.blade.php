@@ -20,7 +20,7 @@
                 @csrf
                 <div class="form-group">
                     <label class="label-servico" for="id_cliente">Cliente:</label>
-                    <select name="id_cliente" id="id_cliente" required>
+                    <select name="id_cliente" id="id_cliente" class="select-cliente" required>
                         <option disabled selected>Selecione um Cliente</option>
                         @foreach($clientes as $cliente)
                             <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         <label class="label-servico" for="marca">Marca:</label>
-                        <select name="marca" id="marca">
+                        <select name="marca" id="marca" class="select-marca">
                             <option disabled selected>Selecione uma marca de Carro</option>
                             <option value="Chevrolet">Chevrolet</option>
                             <option value="Fiat">Fiat</option>
@@ -70,7 +70,7 @@
 
                     <div class="form-group">
                         <label class="label-servico" for="modelo">Modelo:</label>
-                        <select name="modelo" id="modelo" required>
+                        <select name="modelo" id="modelo" class="select-modelo" required>
                             <option disabled selected>Selecione um modelo de Carro</option>
                             <option value="Hatch">Hatch</option>
                             <option value="Sedan">Sedan</option>
@@ -80,7 +80,7 @@
 
                     <div class="form-group">
                         <label class="label-servico" for="ano">Ano:</label>
-                        <input class="input-number-servico" step="any" type="number" id="ano" name="ano"
+                        <input class="input-ano-carro" step="any" type="number" id="ano" name="ano"
                                placeholder="Ano do seu Carro" required>
                     </div>
 
@@ -90,14 +90,18 @@
                                placeholder="Placa do seu Carro" required>
                     </div>
                 </div>
-                <button type="submit" class="button-avancar">Avançar</button>
-            </form>
 
-            <div class="botoes-navegacao">
-                <button type="button" onclick="window.location.href='{{ route('site.home') }}'"
-                        class="button-voltar">Voltar para Home
-                </button>
-            </div>
+                <div class="container-buttons">
+                    <div class="button-container">
+                        <button type="button" onclick="window.location.href='{{ route('site.home') }}'"
+                                class="button-voltar">Voltar para Home
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="button-avancar">Avançar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

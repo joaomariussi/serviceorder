@@ -10,23 +10,23 @@
     @include('site._partials.header')
 
     <div class="container">
-        <div class="section-logo">
-            <div class="logo-content">
-                <div class="image-logo">
-                    <img src="images/logo.png">
+        <div class="content-wrapper">
+            <div class="section-logo">
+                <div class="logo-content">
+                    <div class="image-logo">
+                        <img src="images/logo.png" alt="Logo">
+                    </div>
+                </div>
+                <div class="text-content">
+                    <div>
+                        <h2>Service Order</h2>
+                        <p>CNPJ: 12.345.678/0001-90</p>
+                    </div>
                 </div>
             </div>
-            <div class="text-content">
-                <div>
-                    <h2>Service Order</h2>
-                    <p>CNPJ: 12.345.678/0001-90</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="section">
             <div class="section">
-                <h2 class="dados-cliente">Dados do Cliente</h2>
+                <h2 class="section-title">Dados do Cliente</h2>
                 <div class="cliente-info">
                     <div class="cliente-info-column">
                         <p><strong>Nome:</strong> {{ $cliente->nome }}</p>
@@ -43,28 +43,23 @@
             </div>
 
             <div class="section">
-                <div class="info-carro">
-                    <h2 class="dados-carro">Dados do Carro</h2>
-                    <div class="carro-info">
-                        <div class="carro-info-column">
-                            <p><strong>Carro:</strong> {{ $dados_completo['nome_carro'] }}</p>
-                            <p><strong>Marca:</strong> {{ $dados_completo['marca'] }}</p>
-                        </div>
-                        <div class="carro-info-column">
-                            <p><strong>Modelo:</strong> {{ $dados_completo['modelo'] }}</p>
-                            <p><strong>Ano:</strong> {{ $dados_completo['ano'] }}</p>
-                            <p><strong>Marca:</strong> {{ $dados_completo['placa'] }}</p>
-                        </div>
+                <h2 class="section-title">Dados do Carro</h2>
+                <div class="carro-info">
+                    <div class="carro-info-column">
+                        <p><strong>Carro:</strong> {{ $dados_completo['nome_carro'] }}</p>
+                        <p><strong>Marca:</strong> {{ $dados_completo['marca'] }}</p>
+                    </div>
+                    <div class="carro-info-column">
+                        <p><strong>Modelo:</strong> {{ $dados_completo['modelo'] }}</p>
+                        <p><strong>Ano:</strong> {{ $dados_completo['ano'] }}</p>
+                        <p><strong>Placa:</strong> {{ $dados_completo['placa'] }}</p>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Dados dos Produtos -->
-        <div class="section">
             <div class="section">
-                <h2 class="produtos-servico">Produtos do Serviço</h2>
-                <table>
+                <h2 class="section-title">Produtos do Serviço</h2>
+                <table class="styled-table">
                     <thead>
                     <tr>
                         <th>Nome do Produto</th>
@@ -85,48 +80,54 @@
                     </tbody>
                 </table>
             </div>
-        </div>
 
-        <!-- Div destacada para o orçamento -->
-        <div class="section">
-            <div class="section destacado">
-                <h2 class="orcamento">Orçamento</h2>
-                <div class="orcamento-info">
-                    <div class="destacado-label">Valor dos Produtos:</div>
-                    <div class="destacado-right">{{ $dados_completo['valor_produto'] }}</div>
-                    <div class="destacado-label">Valor da Mão de Obra:</div>
-                    <div class="destacado-right">{{ $dados_completo['valor_mao_obra'] }}</div>
-                    <div class="destacado-label">Valor Total do Serviço:</div>
-                    <div class="destacado-right">R$ {{ $dados_completo['valor_total'] }}</div>
+            <div class="section">
+                <h2 class="section-title">Orçamento</h2>
+                <table class="styled-table">
+                    <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Valor dos Produtos</td>
+                        <td>{{ $dados_completo['valor_produto'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Valor da Mão de Obra</td>
+                        <td>{{ $dados_completo['valor_mao_obra'] }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Valor Total do Serviço</strong></td>
+                        <td><strong>R$ {{ $dados_completo['valor_total'] }}</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container-buttons">
+                <div class="button-container">
+                    <a href="{{ route('site.home') }}" class="button-voltar">Voltar para Home</a>
+                </div>
+                <div class="button-container">
+                    <a href="{{ route('site.exportar-pdf', ['dados_completo' => $dados_completo]) }}"
+                       class="btn-imprimir">Imprimir PDF</a>
                 </div>
             </div>
         </div>
-
-        <div class="container-buttons">
-            <div class="button-container">
-                <a href="{{ route('site.home') }}" class="button-voltar">
-                    Voltar para Home
-                </a>
-            </div>
-            <div class="button-container">
-                <a href="{{ route('site.exportar-pdf', ['dados_completo' => $dados_completo]) }}"
-                   class="btn-imprimir">Imprimir PDF</a>
-            </div>
-        </div>
     </div>
-
 @endsection
 
 @php
     function formatarCPF($cpf): string
     {
-        // Formata o CPF com pontos e traço
         return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
     }
 
     function formatarValor($valor): string
     {
-    // Formata o valor com duas casas decimais
-    return 'R$ ' . number_format($valor, 2, ',', '.');
-}
+        return 'R$ ' . number_format($valor, 2, ',', '.');
+    }
 @endphp

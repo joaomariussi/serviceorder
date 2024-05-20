@@ -49,14 +49,15 @@
                            name="valor_total" placeholder="R$ 0,00" required>
                 </div>
 
-                <div class="botoes-navegacao">
-                    <button type="submit" class="button-finalizar">Finalizar Serviço</button>
-                </div>
-
-                <div class="botoes-navegacao">
-                    <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
-                            class="button-voltar">Voltar
-                    </button>
+                <div class="container-buttons">
+                    <div class="button-container">
+                        <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
+                                class="button-voltar">Voltar
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="button-finalizar">Finalizar Serviço</button>
+                    </div>
                 </div>
             </form>
         </div>

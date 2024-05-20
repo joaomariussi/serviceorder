@@ -1,26 +1,39 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.main-content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
 .container-servico {
-    width: 1000px;
-    margin: 0 auto; /* Centraliza horizontalmente */
-    padding: 5px;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
     background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    left: 345px; /* Largura do .sidebar */
-    top: 23%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
+    font-size: 24px;
+    color: #555;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .label-servico {
     display: flex;
     font-weight: bold;
     margin-bottom: 5px;
+    color: #333;
 }
 
 select,
@@ -29,13 +42,19 @@ input[type="text"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+select:focus,
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
 select:invalid {
-    border-color: red; /* Altera a cor da borda para indicar um estado inválido */
+    border-color: #e3342f;
 }
 
-/* CSS do modal */
 .modal-servico {
     display: none;
     position: fixed;
@@ -45,15 +64,15 @@ select:invalid {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #fff;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
 }
 
@@ -65,7 +84,10 @@ select:invalid {
     cursor: pointer;
 }
 
-.close-modal:hover,
+.close-modal:hover {
+    color: #000;
+}
+
 .form-servico {
     width: auto;
 }
@@ -86,17 +108,18 @@ select:invalid {
 }
 
 .button-finalizar {
+    background-color: #007bff;
     padding: 10px 25px;
     color: #fff;
-    background-color: #1220ff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    float: right; /* Move o botão para o canto direito */
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .button-finalizar:hover {
-    background-color: #0000cc;
+    background-color: #0056b3;
 }
 
 .button-voltar {
@@ -106,38 +129,40 @@ select:invalid {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .button-voltar:hover {
     background-color: #5a6268;
-    border-color: #545b62;
 }
 
 .botoes-navegacao {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .button-remover {
     padding: 8px 15px;
     color: #fff;
     background-color: #dc3545;
-    border-color: #dc3545;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
     width: 100px;
-    margin-left: 10px; /* Espaçamento entre os botões e o preço */
+    margin-left: 10px;
 }
 
-/* Estilo para os contêineres dos produtos */
+.button-remover:hover {
+    background-color: #cc0000;
+}
+
 .produto-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-}
-
-.button-remover:hover {
-    background-color: #cc0000; /* Cor de fundo ao passar o mouse */
 }
 
 .select-servico {
@@ -153,8 +178,8 @@ select:invalid {
     margin-bottom: 15px;
     border-radius: 3px;
     border-color: #ccc;
-    padding: 5px;
-    width: 100px;
+    padding: 10px;
+    width: 110px;
 }
 
 .produtos-selecionados {
@@ -169,7 +194,8 @@ select:invalid {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 5px
+    margin-left: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .button-cancelar:hover {
@@ -183,6 +209,7 @@ select:invalid {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .button-add-modal:hover {
@@ -196,6 +223,7 @@ select:invalid {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .button-open-modal:hover {
@@ -210,14 +238,16 @@ select:invalid {
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
 }
 
 .button-remover-produto:hover {
     background-color: #cc0000;
 }
 
-.main-content {
-    margin-left: 220px;
-    padding: 20px;
+.container-buttons {
+    display: flex;
+    justify-content: space-between; /* Ajusta os botões para os cantos */
+    margin-top: 20px;
 }
-

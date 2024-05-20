@@ -176,10 +176,10 @@ class ServicoController extends Controller
     {
         try {
             // Recupere os dados do serviço da sessão se não forem passados como parâmetro
-            $dadosServico = $request->get('dados_servico');
+            $dados_completo = $request->get('dados_completo');
 
             // Recupere o cliente associado ao serviço
-            $cliente = ClientesModel::find($dadosServico['id_cliente']);
+            $cliente = ClientesModel::find($dados_completo['id_cliente']);
 
             // Verifique se o cliente foi encontrado com sucesso
             if (!$cliente) {
@@ -187,18 +187,18 @@ class ServicoController extends Controller
             }
 
             // Verifique se os produtos estão presentes nos dados do serviço
-            if (!isset($dadosServico['produtos'])) {
+            if (!isset($dados_completo['produtos'])) {
                 throw new Exception('Produtos não encontrados nos dados do serviço.');
             }
 
             // Recupere os IDs dos produtos do serviço
-            $produtosIds = array_column($dadosServico['produtos'], 'id_produto');
+            $produtosIds = array_column($dados_completo['produtos'], 'id_produto');
 
             // Busque os detalhes dos produtos com base nos IDs
             $produtosDetalhes = ProdutosModel::whereIn('id', $produtosIds)->get();
 
             // Combine os detalhes dos produtos com os dados do serviço
-            foreach ($dadosServico['produtos'] as &$produto) {
+            foreach ($dados_completo['produtos'] as &$produto) {
                 foreach ($produtosDetalhes as $produtoDetalhe) {
                     if ($produto['id_produto'] == $produtoDetalhe->id) {
                         $produto['nome'] = $produtoDetalhe->nome;
@@ -213,7 +213,7 @@ class ServicoController extends Controller
 
             // Renderize a visualização da página do PDF
             $dompdf->loadHtml(View::make('site.exportar-pdf',
-                compact('dadosServico', 'cliente'))->render());
+                compact('dados_completo', 'cliente'))->render());
 
             // Renderize o PDF
             $dompdf->render();
