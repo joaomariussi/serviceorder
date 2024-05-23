@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
     color: #333;
     margin: 0;
@@ -115,7 +115,7 @@ select:invalid {
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-avancar {
@@ -126,15 +126,17 @@ select:invalid {
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-voltar:hover {
     background-color: #5a6268;
+    transform: scale(1.05);
 }
 
 .button-avancar:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 .container-buttons {

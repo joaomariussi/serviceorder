@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
     color: #333;
 }
@@ -115,11 +115,12 @@ select:invalid {
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-finalizar:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 .button-voltar {
@@ -129,11 +130,12 @@ select:invalid {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-voltar:hover {
     background-color: #5a6268;
+    transform: scale(1.05);
 }
 
 .botoes-navegacao {
@@ -223,11 +225,12 @@ select:invalid {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-open-modal:hover {
     background-color: #218838;
+    transform: scale(1.05);
 }
 
 .button-remover-produto {
