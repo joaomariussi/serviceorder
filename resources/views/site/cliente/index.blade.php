@@ -2,13 +2,13 @@
 
 <title>Gerenciamento de Clientes</title>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/cliente.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css">
 @endpush
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
 @section('conteudo')
     @include('site._partials.header')
@@ -39,7 +39,7 @@
                             -{{ substr($cliente->telefone, -4) }}</td>
                         <td>
                             <form class="form-clientes" id="form-editar-fornecedor-{{ $cliente->id }}"
-{{--                                  action="{{ route('app.fornecedor.editar', ['id' => $cliente->id]) }}"--}}
+                                  {{--                                  action="{{ route('app.fornecedor.editar', ['id' => $cliente->id]) }}"--}}
                                   method="post">
                                 @csrf
                                 @method('DELETE')
@@ -68,33 +68,40 @@
                     type: 'DELETE',
                     url: '/cliente/' + id,
                     data: {
-                        id: id,
                         _token: '{{ csrf_token() }}'
                     },
-                    dataType: 'json', // Define o tipo de retorno
                     success: function (response) {
-                        console.log(response.message);
-                        // Destroi a instância atual do DataTables
-                        $('#table-fornecedores').DataTable().destroy();
-                        // Recarrega a página após 1 segundo
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1000);
+                        // Redireciona para a página após a exclusão bem-sucedida
+                        window.location.href = '{{ route("site.cliente.index") }}';
                     },
                     error: function (xhr, status, error) {
-                        console.error(error);
+                        // Redireciona para a página de listagem com a mensagem de erro
+                        window.location.href = '{{ route("site.cliente.index") }}';
                     }
                 });
             }
         }
+
+        $(document).ready(function(){
+            // Espera a página carregar completamente
+            setTimeout(function(){
+                // Verifica se há uma mensagem flash
+                if($('.alert').length > 0){
+                    // Mostra a mensagem flash
+                    $('.alert').slideDown();
+                    // Define um tempo para esconder a mensagem flash após 5 segundos
+                    setTimeout(function(){
+                        $('.alert').slideUp();
+                    }, 3000);
+                }
+            }, 1000); // Aguarda 1 segundo antes de verificar a existência da mensagem flash
+        });
     </script>
+
 
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script src="{{ asset('js/table-cliente.js') }}"></script>
 @endpush
-
-

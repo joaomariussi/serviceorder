@@ -26,25 +26,28 @@ class ClienteController extends Controller
     {
         try {
             // Busca o cliente pelo ID
-            $cliente = (new ClientesModel)->find($id);
+            $cliente = ClientesModel::find($id);
 
             // Verifica se o cliente existe
-            if ($cliente) {
-                // Verifica se há serviços associados
-                if ($cliente->servico()->exists()) {
-                    return response()->json(['error' => 'Cliente não pode ser excluído, pois possui serviços associados.'], 400);
-                }
-
-                // Exclui o cliente do banco de dados
-                $cliente->delete();
-                return response()->json(['message' => 'Cliente excluído com sucesso!']);
-            } else {
+            if (!$cliente) {
+                flash()->error('Cliente não encontrado!');
                 return response()->json(['error' => 'Cliente não encontrado!'], 404);
             }
+
+            // Verifica se há serviços associados
+            if ($cliente->servico()->exists()) {
+                flash()->error('Cliente não pode ser excluído, pois possui serviços associados.');
+                return response()->json(['error' => 'Cliente não pode ser excluído, pois possui serviços associados.'], 400);
+            }
+
+            // Exclui o cliente do banco de dados
+            $cliente->delete();
+
+            flash()->success('Cliente excluído com sucesso!');
+            return response()->json(['message' => 'Cliente excluído com sucesso!']);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            flash()->error('Ocorreu um erro ao excluir o cliente. Por favor, tente novamente.');
+            return response()->json(['error' => 'Ocorreu um erro ao excluir o cliente. Por favor, tente novamente.'], 500);
         }
     }
-
-
 }

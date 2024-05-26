@@ -1,0 +1,19 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 9999;
+    display: none;
+}
+
+.notification.show {
+    display: block;
+}
+
+.notification.hidden {
+    display: none;
+}

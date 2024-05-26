@@ -5,6 +5,7 @@
 <div class="wrapper">
     <div class="content">
         <header class="admin-header">
+            @include('flash::message')
         </header>
     </div>
 

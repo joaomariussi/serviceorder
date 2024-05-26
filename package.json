@@ -20,6 +20,7 @@
     "dependencies": {
         "autoprefixer": "^10.4.19",
         "bootstrap": "^5.3.3",
+        "toastr": "^2.1.4",
         "typeface": "0.0.0"
     }
 }
