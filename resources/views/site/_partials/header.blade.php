@@ -15,7 +15,7 @@
             </a>
         </div>
         <ul class="menu">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="{{ route('site.home') }}">Dashboard</a></li>
             <li class="submenu" id="clientes-submenu">
                 <a href="{{route('site.cliente.index')}}">Clientes</a>
                 <ul>
@@ -32,7 +32,7 @@
             </li>
             <li><a href="#">Sobre Nós</a></li>
             <li><a href="#">Contato</a></li>
-            <li><a href="#">Sair</a></li>
+            <li><a href="{{ route('logout') }}">Sair</a></li>
         </ul>
     </div>
 </div>

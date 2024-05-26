@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServicoController;
 use Illuminate\Support\Facades\Route;
 
-// Todas as rotas estão dentro do grupo 'web' e, portanto, são protegidas pelo middleware 'web'
+// Todas as rotas estão dentro do grupo 'web', portanto, são protegidas pelo middleware 'web'
 Route::group(['middleware' => 'web'], function () {
 
     // Rota da página inicial
@@ -28,6 +28,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/servico-finalizado', [ServicoController::class, 'servicoFinalizado'])->name('site.servico-finalizado')->middleware('auth');
 
     Route::get('/clientes', [ClienteController::class, 'index'])->name('site.cliente.index')->middleware('auth');
+    Route::delete('/cliente/{id}', [ClienteController::class, 'excluir'])->name('site.cliente.excluir')->middleware('auth');
 
     Route::get('/produtos', [ServicoController::class, 'buscarProdutos'])->name('produtos.listar');
 });
