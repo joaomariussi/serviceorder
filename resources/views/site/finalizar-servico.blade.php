@@ -1,18 +1,21 @@
 @extends('site._partials.basic')
 
+@section('title', 'Finalizar Serviço')
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/finalizar-servico.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 @endpush
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@push('head-scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+@endpush
 
-<!-- jQuery Mask Money -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-
-<!-- Select2 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+@push('scripts')
+    <script src={{ asset('js/scripts.js') }}></script>
+@endpush
 
 @section('conteudo')
     @include('site._partials.header')
@@ -82,6 +85,4 @@
     </script>
 @endsection
 
-@push('scripts')
-    <script src={{ asset('js/scripts.js') }}></script>
-@endpush
+

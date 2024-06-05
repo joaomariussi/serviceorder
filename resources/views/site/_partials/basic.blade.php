@@ -3,8 +3,8 @@
         @include('site._partials.head')
     <body>
         @yield('conteudo')
+        @stack('scripts')
     </body>
-    @stack('scripts')
 </html>
 
 

@@ -1,13 +1,19 @@
 @extends('site._partials.basic')
 
-<title>Gerenciamento de Clientes</title>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+@section('title', 'Clientes')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/cliente.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css">
+@endpush
+
+@push('head-scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/table-cliente.js') }}"></script>
 @endpush
 
 @section('conteudo')
@@ -97,11 +103,6 @@
             }, 1000); // Aguarda 1 segundo antes de verificar a existência da mensagem flash
         });
     </script>
-
-
 @endsection
 
-@push('scripts')
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-    <script src="{{ asset('js/table-cliente.js') }}"></script>
-@endpush
+

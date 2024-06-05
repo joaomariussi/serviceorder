@@ -8,6 +8,8 @@ use App\Models\ServicoModel;
 use App\Models\ServicosProdutosModel;
 use Dompdf\Dompdf;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,7 +28,7 @@ class ServicoController extends Controller
         }
     }
 
-    public function criarServico(Request $request)
+    public function criarServico(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
     {
         try {
             $clientes = ClientesModel::all(); // Busca os clientes novamente
@@ -41,7 +43,7 @@ class ServicoController extends Controller
         }
     }
 
-    public function finalizarServico(Request $request)
+    public function finalizarServico(Request $request): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
     {
         try {
 

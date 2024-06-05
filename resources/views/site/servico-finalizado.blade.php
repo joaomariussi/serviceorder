@@ -1,5 +1,7 @@
 @extends('site._partials.basic')
 
+@section('title', 'Serviço Finalizado')
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/servico-finalizado.css') }}">
 @endpush
