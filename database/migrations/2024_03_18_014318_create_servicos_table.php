@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdemServico extends Migration
+class CreateServicosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOrdemServico extends Migration
      */
     public function up()
     {
-        Schema::create('ordem_servico', function (Blueprint $table) {
+        Schema::create('servicos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_cliente')->constrained('clientes');
             $table->string('nome_carro');
@@ -21,8 +21,6 @@ class CreateOrdemServico extends Migration
             $table->string('modelo');
             $table->string('ano');
             $table->string('placa');
-            $table->foreignId('id_produto')->constrained('produtos');
-            $table->integer('quantidade');
             $table->integer('valor_mao_de_obra');
             $table->integer('valor_total');
             $table->timestamps();
@@ -36,6 +34,6 @@ class CreateOrdemServico extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordem_servico');
+        Schema::dropIfExists('servicos');
     }
 }

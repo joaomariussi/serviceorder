@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameOrdemServicoTableToServico extends Migration
+class CreateUsuariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class RenameOrdemServicoTableToServico extends Migration
      */
     public function up()
     {
-        Schema::rename('ordem_servico', 'servico');
-            //
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
+            $table->string('email');
+            $table->string('password');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,6 +29,6 @@ class RenameOrdemServicoTableToServico extends Migration
      */
     public function down()
     {
-        Schema::rename('ordem_servico', 'servico');
+        Schema::dropIfExists('usuarios');
     }
 }

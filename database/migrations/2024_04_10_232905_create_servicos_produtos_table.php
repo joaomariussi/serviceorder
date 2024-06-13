@@ -15,14 +15,17 @@ class CreateServicosProdutosTable extends Migration
     {
         Schema::create('servicos_produtos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('servico_id');
-            $table->unsignedBigInteger('produto_id');
-            $table->decimal('valor_produto', 10, 2); // Altere os parâmetros conforme necessário
+            $table->unsignedBigInteger('id_servico');
+            $table->unsignedBigInteger('id_cliente');
+            $table->unsignedBigInteger('id_produto');
+            $table->decimal('valor_produto', 10, 2);
             $table->integer('quantidade');
             $table->timestamps();
 
-            $table->foreign('servico_id')->references('id')->on('servicos')->onDelete('cascade');
-            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
+            // Chaves estrangeiras
+            $table->foreign('id_servico')->references('id')->on('servicos')->onDelete('cascade');
+            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');
+            $table->foreign('id_produto')->references('id')->on('produtos')->onDelete('cascade');
         });
     }
 
