@@ -8,7 +8,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 
 class ClienteController extends Controller
 {
@@ -50,4 +49,5 @@ class ClienteController extends Controller
             return response()->json(['error' => 'Ocorreu um erro ao excluir o cliente. Por favor, tente novamente.'], 500);
         }
     }
+
 }

@@ -109,8 +109,7 @@ class ServicoController extends Controller
             return redirect()->route('site.servico-finalizado');
 
         } catch (Throwable $e) {
-            return view('site.servico', compact('clientes'))->
-            with('error', 'Erro ao finalizar serviço: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao finalizar serviço: ' . $e->getMessage());
         }
     }
 

@@ -72,17 +72,17 @@
             if (confirm('Deseja realmente excluir este cliente?')) {
                 $.ajax({
                     type: 'DELETE',
-                    url: '/cliente/' + id,
+                    url: '/clientes/excluir/' + id,
                     data: {
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (response) {
                         // Redireciona para a página após a exclusão bem-sucedida
-                        window.location.href = '{{ route("site.cliente.index") }}';
+                        window.location.href = '{{ route("site.cliente") }}';
                     },
                     error: function (xhr, status, error) {
                         // Redireciona para a página de listagem com a mensagem de erro
-                        window.location.href = '{{ route("site.cliente.index") }}';
+                        window.location.href = '{{ route("site.cliente") }}';
                     }
                 });
             }

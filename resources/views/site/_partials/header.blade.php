@@ -18,16 +18,16 @@
         <ul class="menu">
             <li><a href="{{ route('site.home') }}">Dashboard</a></li>
             <li class="submenu" id="clientes-submenu">
-                <a href="{{route('site.cliente.index')}}">Clientes</a>
+                <a href="{{ route('site.cliente')}}">Clientes</a>
                 <ul>
                     <li><a href="#">Novo Cliente</a></li>
-                    <li><a href="{{route('site.cliente.index')}}">Visualizar Clientes</a></li>
+                    <li><a href="{{ route('site.cliente')}}">Visualizar Clientes</a></li>
                 </ul>
             </li>
             <li class="submenu">
-                <a href="{{route('site.servico')}}">Serviços</a>
+                <a href="{{ route('site.servico')}}">Serviços</a>
                 <ul>
-                    <li><a href="{{route('site.servico')}}">Novo Serviço</a></li>
+                    <li><a href="{{ route('site.servico')}}">Novo Serviço</a></li>
                     <li><a href="#">Visualizar Serviços</a></li>
                 </ul>
             </li>

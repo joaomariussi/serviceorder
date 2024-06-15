@@ -17,6 +17,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 
+    Route::group(['prefix' => '/clientes'], function () {
+        Route::get('/', [ClienteController::class, 'index'])->name('site.cliente');
+        Route::delete('/excluir/{id}', [ClienteController::class, 'excluir'])->name('site.cliente.excluir');
+    });
+
     // Rotas relacionadas à ordem de serviço
     Route::get('/servico', [ServicoController::class, 'index'])->name('site.servico')->middleware('auth');
     Route::post('/servico', [ServicoController::class, 'criarServico'])->name('site.criar-servico')->middleware('auth');
@@ -26,9 +31,6 @@ Route::group(['middleware' => 'web'], function () {
 
     // Adicionando a rota para a view de sucesso
     Route::get('/servico-finalizado', [ServicoController::class, 'servicoFinalizado'])->name('site.servico-finalizado')->middleware('auth');
-
-    Route::get('/clientes', [ClienteController::class, 'index'])->name('site.cliente.index')->middleware('auth');
-    Route::delete('/cliente/{id}', [ClienteController::class, 'excluir'])->name('site.cliente.excluir')->middleware('auth');
 
     Route::get('/produtos', [ServicoController::class, 'buscarProdutos'])->name('produtos.listar');
 });
