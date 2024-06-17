@@ -11,7 +11,7 @@ class CreateClientesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
@@ -22,8 +22,8 @@ class CreateClientesTable extends Migration
             $table->string('cidade');
             $table->string('bairro');
             $table->string('estado');
-            $table->integer('cep');
-            $table->integer('telefone');
+            $table->string('cep');
+            $table->string('telefone');
             $table->date('data_nascimento');
             $table->string('sexo');
             $table->timestamps();
@@ -35,7 +35,7 @@ class CreateClientesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('clientes');
     }

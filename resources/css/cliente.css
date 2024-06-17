@@ -1,7 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
 .conteudo-pagina {
     display: grid;
     grid-template-columns: auto 1fr;

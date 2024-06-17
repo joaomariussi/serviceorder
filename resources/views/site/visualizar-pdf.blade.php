@@ -7,8 +7,6 @@
 @endpush
 
 @section('conteudo')
-    @include('site._partials.header')
-
     <div class="container">
         <div class="content-wrapper">
             <div class="section-logo">

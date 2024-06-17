@@ -7,8 +7,6 @@
 @endpush
 
 @section('conteudo')
-    @include('site._partials.header')
-
     <main class="main-content">
         <section class="container-sucesso">
             <div class="content">

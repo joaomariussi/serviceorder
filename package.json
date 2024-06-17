@@ -1,12 +1,14 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
+        "clean": "if exist temp rd /s /q temp && mkdir temp",
+        "clear": "echo 'Clearing cache...'",
+        "dev": "npm run clean && npm run development",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
-        "prod": "npm run production",
+        "prod": "npm run clean && npm run production",
         "production": "mix --production"
     },
     "devDependencies": {
@@ -15,6 +17,9 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "postcss-import": "^8.1.2",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.77.5",
+        "sass-loader": "^12.1.0",
         "sweetalert2": "^11.11.0"
     },
     "dependencies": {

@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #fff; /* Cor de fundo branco */
+    color: #333; /* Cor do texto */
+    overflow-y: auto; /* Adiciona scroll caso o conteúdo seja maior que a altura */
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-right: 1px solid #ddd; /* Linha de divisão à direita */
+    padding-bottom: 20px;
+}
+
+.sidebar .logo {
+    margin: 20px auto;
+    display: block;
+    width: 50px;
+    height: auto;
+}
+
+.sidebar .menu {
+    margin-top: 20px;
+    padding-left: 0;
+    list-style-type: none; /* Remove marcadores de lista */
+}
+
+.sidebar .menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar .menu li a {
+    display: block;
+    text-decoration: none;
+    color: #333; /* Cor do texto */
+    padding: 12px 20px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.sidebar .menu li a i {
+    margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+}
+
+.sidebar .menu li a:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+    color: #000; /* Cor do texto ao passar o mouse */
+}
+
+.sidebar .submenu-items {
+    display: none; /* Inicia oculto */
+    background-color: #ffffff; /* Cor de fundo do submenu */
+    margin-left: 20px; /* Espaço à esquerda para diferenciar dos menus principais */
+    border-radius: 4px; /* Bordas arredondadas */
+    border: none;
+}
+
+.sidebar .submenu-items li {
+    margin: 0;
+}
+
+.sidebar .submenu-items li a {
+    padding: 10px 20px;
+    color: #555; /* Cor do texto do submenu */
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar .submenu-items li a:hover {
+    background-color: #e0e0e0; /* Cor de fundo do submenu ao passar o mouse */
+    color: #000; /* Cor do texto do submenu ao passar o mouse */
+}
+
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* Estilos adicionais para tornar a navegação mais amigável */
+.sidebar .menu li a:active,
+.sidebar .menu li a:focus,
+.sidebar .submenu-items li a:active,
+.sidebar .submenu-items li a:focus {
+    outline: none;
+    background-color: #e0e0e0; /* Cor de fundo ao clicar ou focar */
+}
+
+.sidebar .submenu-items {
+    padding-left: 20px; /* Indentação dos submenus */
+}
+
+.sidebar .submenu-items li a {
+    font-size: 14px; /* Tamanho da fonte do submenu */
+}
+
+.sidebar .menu li.submenu > a:after {
+    content: '\25B6'; /* Setinha para a direita */
+    position: absolute;
+    right: 20px;
+}
+
+.sidebar .menu li.submenu.open > a:after {
+    content: '\25BC'; /* Setinha para baixo */
+}

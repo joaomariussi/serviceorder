@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ServicoController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/servico-finalizado', [ServicoController::class, 'servicoFinalizado'])->name('site.servico-finalizado')->middleware('auth');
 
     Route::get('/produtos', [ServicoController::class, 'buscarProdutos'])->name('produtos.listar');
+
+    Route::get('produto', [ProdutoController::class, 'index'])->name('site.produto');
 });
