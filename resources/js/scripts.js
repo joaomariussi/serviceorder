@@ -2,72 +2,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Armazenar os produtos selecionados
     var produtosSelecionados = [];
 
-    // Ouvinte de evento para o botão "Cancelar"
-    var cancelarButton = document.getElementById('cancelar');
-    cancelarButton.addEventListener('click', function () {
-        closeModal();
-    });
-
-    // Ouvinte de evento para abrir o modal quando o botão for clicado
-    var openModalButton = document.getElementById('openModal');
-    openModalButton.addEventListener('click', function () {
-        openModal();
-    });
-
-    // Ouvinte de evento para o botão "Adicionar"
-    var adicionarButton = document.getElementById('adicionarProduto');
-    adicionarButton.addEventListener('click', function () {
-        // Obter o produto selecionado
-        var select = document.getElementById('produtos-list');
-        var selectedProductId = select.value;
-        var selectedProductName = select.options[select.selectedIndex].text;
-
-        // Obter a quantidade
-        var quantidadeInput = document.getElementById('quantidade');
-        var quantidade = parseInt(quantidadeInput.value);
-
-        // Verificar se a quantidade foi selecionada
-        if (quantidade === '' || quantidade <= 0) {
-            alert('Selecione uma quantidade válida para o produto.');
-            return; // Sair da função sem adicionar o produto
-        }
-
-        // Obter o preço
-        var selectedProductPrice = parseFloat(select.options[select.selectedIndex].dataset.preco);
-
-        // Verificar se o produto já foi selecionado
-        var produtoExistente = produtosSelecionados.find(produto => produto.id === selectedProductId);
-        if (produtoExistente) {
-            // Atualizar a quantidade e o valor total do produto existente
-            produtoExistente.quantidade += quantidade;
-            produtoExistente.preco = selectedProductPrice; // Atualiza o preço caso ele tenha mudado
-        } else {
-            // Criar um objeto representando o novo produto selecionado
-            var produto = {
-                id: selectedProductId,
-                nome: selectedProductName,
-                quantidade: quantidade,
-                preco: selectedProductPrice
-            };
-            // Adiciona o produto à lista de produtos selecionados
-            produtosSelecionados.push(produto);
-        }
-
-        // Atualiza a lista de produtos na view
-        updateProdutoList();
-
-        // Fecha o modal
-        closeModal();
-
-        // Atualiza o valor total na view
-        updateValorTotal();
-
-        // Limpa o campo de quantidade para que o usuário possa selecionar outra quantidade
-        quantidadeInput.value = '';
-
-        // Atualiza ou adiciona o produto ao formulário
-        updateProdutoInForm();
-    });
+    // Função para fechar o modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
 
     // Função para adicionar ou atualizar o produto no formulário
     function updateProdutoInForm() {
@@ -84,6 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
             inputId.value = produto.id;
             form.appendChild(inputId);
 
+            var inputNome = document.createElement('input');
+            inputNome.type = 'hidden';
+            inputNome.name = 'produtos[' + produto.id + '][nome_produto]';
+            inputNome.value = produto.nome;
+            form.appendChild(inputNome);
+
             var inputValorProduto = document.createElement('input');
             inputValorProduto.type = 'hidden';
             inputValorProduto.name = 'produtos[' + produto.id + '][valor_produto]';
@@ -96,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
             inputQuantidade.value = produto.quantidade;
             form.appendChild(inputQuantidade);
         });
+
+        updateValorTotal();
     }
 
     // Função para abrir o modal
@@ -114,20 +60,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Preenche o select com os produtos retornados
                 data.forEach(function (produto) {
                     var option = document.createElement('option');
-                    option.text = produto.nome; // Supondo que 'nome' seja o campo que contém o nome do produto
-                    option.value = produto.id; // Supondo que 'id' seja o campo que contém o ID do produto
-                    option.dataset.preco = produto.preco; // Adiciona o preço como um atributo personalizado
+                    option.text = produto.nome;
+                    option.value = produto.id;
+                    option.dataset.preco = produto.preco;
+                    option.dataset.quantidade = produto.quantidade;
                     select.appendChild(option);
                 });
             })
             .catch(error => {
                 console.error('Erro ao obter os produtos:', error);
             });
-    }
-
-    // Função para fechar o modal
-    function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
     }
 
     // Função para atualizar a lista de produtos na view
@@ -177,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         valorProdutosInput.value = 'R$ ' + valorTotalProdutos.toFixed(2);
 
-        var valorMaoObraInput = document.getElementById('valor_mao_obra');
+        var valorMaoObraInput = document.getElementById('valor_mao_de_obra');
         var valorMaoObra = parseFloat(valorMaoObraInput.value.replace('R$ ', '').replace('.', '').replace(',', '.'));
 
         if (!isNaN(valorMaoObra)) {
@@ -191,7 +133,80 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    $('#valor_mao_obra').maskMoney({
+    // Ouvinte de evento para o botão "Cancelar"
+    var cancelarButton = document.getElementById('cancelar');
+    cancelarButton.addEventListener('click', function () {
+        closeModal();
+    });
+
+    // Ouvinte de evento para abrir o modal quando o botão for clicado
+    var openModalButton = document.getElementById('openModal');
+    openModalButton.addEventListener('click', function () {
+        openModal();
+    });
+
+    // Ouvinte de evento para o botão "Adicionar"
+    var adicionarButton = document.getElementById('adicionarProduto');
+    adicionarButton.addEventListener('click', function () {
+        // Obter o produto selecionado
+        var select = document.getElementById('produtos-list');
+        var selectedProductId = select.value;
+        var selectedProductName = select.options[select.selectedIndex].text;
+        var selectedProductStock = parseInt(select.options[select.selectedIndex].dataset.quantidade); // Quantidade disponível do produto
+
+        // Obter a quantidade
+        var quantidadeInput = document.getElementById('quantidade');
+        var quantidade = parseInt(quantidadeInput.value);
+
+        // Verificar se a quantidade foi selecionada
+        if (quantidade === '' || quantidade <= 0) {
+            alert('Selecione uma quantidade válida para o produto.');
+            return; // Sair da função sem adicionar o produto
+        }
+
+        if (quantidade > selectedProductStock) {
+            alert('A quantidade selecionada excede o estoque disponível.');
+            return; // Sair da função sem adicionar o produto
+        }
+
+        // Obter o preço
+        var selectedProductPrice = parseFloat(select.options[select.selectedIndex].dataset.preco);
+
+        // Verificar se o produto já foi selecionado
+        var produtoExistente = produtosSelecionados.find(produto => produto.id === selectedProductId);
+        if (produtoExistente) {
+            // Atualizar a quantidade e o valor total do produto existente
+            produtoExistente.quantidade += quantidade;
+            produtoExistente.preco = selectedProductPrice; // Atualiza o preço caso ele tenha mudado
+        } else {
+            // Criar um objeto representando o novo produto selecionado
+            var produto = {
+                id: selectedProductId,
+                nome: selectedProductName,
+                quantidade: quantidade,
+                preco: selectedProductPrice
+            };
+            // Adiciona o produto à lista de produtos selecionados
+            produtosSelecionados.push(produto);
+        }
+
+        // Atualiza a lista de produtos na view
+        updateProdutoList();
+
+        // Fecha o modal
+        closeModal();
+
+        // Atualiza o valor total na view
+        updateValorTotal();
+
+        // Limpa o campo de quantidade para que o usuário possa selecionar outra quantidade
+        quantidadeInput.value = '';
+
+        // Atualiza ou adiciona o produto ao formulário
+        updateProdutoInForm();
+    });
+
+    $('#valor_mao_de_obra').maskMoney({
         prefix: 'R$ ',
         allowNegative: false,
         thousands: '.',

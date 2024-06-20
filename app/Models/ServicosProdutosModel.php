@@ -17,6 +17,7 @@ use HasFactory;
         'id_cliente',
         'id_produto',
         'valor_produto',
+        'nome_produto',
         'quantidade'
     ];
 

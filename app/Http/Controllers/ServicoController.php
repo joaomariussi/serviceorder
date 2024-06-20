@@ -46,9 +46,6 @@ class ServicoController extends Controller
     public function finalizarServico(Request $request): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
     {
         try {
-
-            $clientes = ClientesModel::all(); // Busca os clientes novamente
-
             if (!$request->session()->has('dados_servico')) {
                 return view('site.servico')->with('error',
                     'Erro ao finalizar serviço: Dados do serviço não encontrados na sessão.');
@@ -67,11 +64,11 @@ class ServicoController extends Controller
             $dados_completo['valor_total'] = str_replace('R$ ', '', $dados_completo['valor_total']);
 
             // Remover o prefixo "R$ " do valor da mão de obra antes de salvar
-            $valor_mao_obra = str_replace('R$ ', '', $dados_completo['valor_mao_obra']);
+            $valor_mao_de_obra = str_replace('R$ ', '', $dados_completo['valor_mao_de_obra']);
             // Remover possíveis separadores de milhares (pontos)
-            $valor_mao_obra = str_replace('.', '', $valor_mao_obra);
+            $valor_mao_de_obra = str_replace('.', '', $valor_mao_de_obra);
             // Substituir a vírgula decimal por ponto
-            $valor_mao_obra = str_replace(',', '.', $valor_mao_obra);
+            $valor_mao_de_obra = str_replace(',', '.', $valor_mao_de_obra);
 
             // Salva o serviço
             $servico = new ServicoModel();
@@ -81,7 +78,7 @@ class ServicoController extends Controller
             $servico->modelo = $dados_completo['modelo'] ?? null;
             $servico->ano = $dados_completo['ano'] ?? null;
             $servico->placa = $dados_completo['placa'] ?? null;
-            $servico->valor_mao_obra = (float) $valor_mao_obra;
+            $servico->valor_mao_de_obra = (float) $valor_mao_de_obra;
             $servico->valor_total = $dados_completo['valor_total'];
             $servico->save();
 
@@ -90,6 +87,7 @@ class ServicoController extends Controller
                 $servicoProduto->id_servico = $servico->id;
                 $servicoProduto->id_cliente = $dados_completo['id_cliente'];
                 $servicoProduto->id_produto = $produto['id_produto'];
+                $servicoProduto->nome_produto = $produto['nome_produto'];
 
                 // Remover o prefixo "R$ " do valor do produto antes de salvar
                 $valor_produto = str_replace('R$ ', '', $produto['valor_produto']);
@@ -113,7 +111,7 @@ class ServicoController extends Controller
         }
     }
 
-    public function servicoFinalizado(Request $request)
+    public function servicoFinalizado(Request $request): Factory|\Illuminate\Contracts\View\View|Application|RedirectResponse
     {
         try {
             // Recupera os dados do serviço da sessão
@@ -124,13 +122,29 @@ class ServicoController extends Controller
                 return redirect()->route('site.servico')->with('error', 'Erro ao exibir sucesso: Dados do serviço não encontrados.');
             }
 
+            // Recupere os IDs dos produtos do serviço
+            $produtosIds = array_column($dados_completo['produtos'], 'id_produto');
+
+            // Busque os detalhes dos produtos com base nos IDs
+            $produtosDetalhes = ProdutosModel::whereIn('id', $produtosIds)->get();
+
+            // Combine os detalhes dos produtos com os dados do serviço
+            foreach ($dados_completo['produtos'] as &$produto) {
+                foreach ($produtosDetalhes as $produtoDetalhe) {
+                    if ($produto['id_produto'] == $produtoDetalhe->id) {
+                        $produto['nome'] = $produtoDetalhe->nome;
+                        break;
+                    }
+                }
+            }
+
             return view('site.servico-finalizado', compact('dados_completo'));
         } catch (Throwable $e) {
             return redirect()->route('site.servico')->with('error', 'Erro ao exibir sucesso: ' . $e->getMessage());
         }
     }
 
-    public function gerarPdf(Request $request)
+    public function gerarPdf(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
     {
         try {
             // Recupere os dados do serviço da sessão se não forem passados como parâmetro
@@ -160,7 +174,6 @@ class ServicoController extends Controller
                 foreach ($produtosDetalhes as $produtoDetalhe) {
                     if ($produto['id_produto'] == $produtoDetalhe->id) {
                         $produto['nome'] = $produtoDetalhe->nome;
-                        // Adicione outros detalhes do produto conforme necessário
                         break;
                     }
                 }
