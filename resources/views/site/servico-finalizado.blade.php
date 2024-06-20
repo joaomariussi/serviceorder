@@ -12,6 +12,21 @@
             <div class="content">
                 <h1>Serviço Finalizado com Sucesso</h1>
                 <p>O seu serviço foi finalizado com sucesso. Obrigado por utilizar nossos serviços!</p>
+
+                <!-- Exibir produtos trocados -->
+                <p><strong>Produtos Trocados</strong></p>
+                <ul>
+                    @foreach($dados_completo['produtos'] as $produto)
+                        <li>{{ $produto['nome'] }} - R$ {{ number_format(floatval($produto['valor_produto']), 2, ',', '.') }}</li>
+                    @endforeach
+                </ul>
+
+                <p><strong>Valor da Mão de Obra:</strong>
+                    {{ $dados_completo['valor_mao_de_obra'] }}
+                </p>
+
+                <p><strong>Valor Total:</strong> R$ {{ number_format(floatval($dados_completo['valor_total']), 2, ',', '.') }}</p>
+
                 <div class="botoes-navegacao">
                     <button type="button" onclick="window.location.href='{{ route('site.home') }}'" class="button-voltar">
                         Voltar para Home

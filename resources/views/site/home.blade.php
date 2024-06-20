@@ -1,3 +1,5 @@
+@php use Carbon\Carbon; @endphp
+
 @extends('site._partials.basic')
 
 @section('title', 'Home')
@@ -9,33 +11,48 @@
 @section('conteudo')
     <div class="wrapper">
         <div class="content">
-            <div class="container-home">
+            <div class="welcome-message">
                 <h2 class="title-h2">Olá, {{ Auth::user()->nome }}</h2>
-                <h2>Bem-vindo ao seu Painel Administrativo</h2>
-                <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
-                        class="button-iniciar">
-                    Iniciar Serviço
-                </button>
+                <p class="mb-0">Bem-vindo ao seu Painel Administrativo</p>
             </div>
 
             <div class="dashboard">
-                <div class="card card-pedidos">
-                    <i class="fas fa-shopping-cart fa-3x"></i>
-                    <h3>Pedidos</h3>
-                    <p>Pedidos realizados</p>
-                    <p>{{ $total_pedidos }}</p>
+                <div class="section-title">
+                    <h3>Resumo Semanal</h3>
                 </div>
-                <div class="card card-clientes">
-                    <i class="fas fa-users fa-3x"></i>
-                    <h3>Clientes</h3>
-                    <p>Total de clientes</p>
-                    <p>{{ $total_clientes }}</p>
+                <div class="date-range">
+                    <p>Dados desta semana, de {{ Carbon::now()->startOfWeek()->format('d/m/Y') }} até {{ Carbon::now()->endOfWeek()->format('d/m/Y') }}</p>
                 </div>
-                <div class="card card-produtos">
-                    <i class="fas fa-boxes fa-3x"></i>
-                    <h3>Produtos</h3>
-                    <p>Total de produtos</p>
-                    <p>{{ $total_produtos }}</p>
+
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h4>Vendas</h4>
+                        <table>
+                            <tr>
+                                <td><i class="fas fa-shopping-cart"></i> Total de pedidos:</td>
+                                <td>{{ $total_pedidos }}</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-money-bill-wave"></i> Valor total dos pedidos:</td>
+                                <td>R$ {{ number_format($valor_total_pedidos, 2, ',', '.') }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <h4>Loja</h4>
+                        <table>
+                            <tr>
+                                <td><i class="fas fa-user-plus"></i> Clientes novos:</td>
+                                <td>{{ $total_clientes }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fa-solid fa-boxes-stacked"></i> Total de produtos:</td>
+                                <td>{{ $total_produtos }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

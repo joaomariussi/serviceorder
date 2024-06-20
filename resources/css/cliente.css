@@ -1,21 +1,18 @@
 .conteudo-pagina {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 210px;
-    padding: 30px;
+    margin-left: 100px;
+    padding-top: 10px;
 }
 
-.titulo-cliente {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
+.title-h1 {
+    font-size: 25px;
+    color: #000000;
+    margin-left: 100px;
+    margin-top: 50px;
 }
 
 .menu-cliente {
-    justify-content: center;
-    margin-bottom: 20px;
-    grid-column: 2;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Estilos para o modal */
@@ -73,6 +70,26 @@
     background-color: #007a9b;
 }
 
+.button-view {
+    width: auto;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-left: 10px; /* Adiciona uma margem à esquerda para criar espaço entre os botões */
+}
+
+.button-view:hover {
+    background-color: #45a049;
+}
+
 .button-delete {
     width: auto;
     background-color: #f44336;
@@ -94,8 +111,6 @@
 }
 
 .form-clientes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
     margin-top: 10px;
 }
+

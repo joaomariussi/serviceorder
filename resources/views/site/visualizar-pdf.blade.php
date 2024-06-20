@@ -12,7 +12,7 @@
             <div class="section-logo">
                 <div class="logo-content">
                     <div class="image-logo">
-                        <img src="images/logo.png" alt="Logo">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
                     </div>
                 </div>
                 <div class="text-content">
@@ -95,7 +95,7 @@
                     </tr>
                     <tr>
                         <td>Valor da Mão de Obra</td>
-                        <td>{{ $dados_completo['valor_mao_obra'] }}</td>
+                        <td>{{ $dados_completo['valor_mao_de_obra'] }}</td>
                     </tr>
                     <tr>
                         <td><strong>Valor Total do Serviço</strong></td>

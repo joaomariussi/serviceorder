@@ -122,7 +122,7 @@
     <h2>Orçamento</h2>
     <div class="orcamento-info">
         <div><strong>Valor dos Produtos:</strong> {{ $dados_completo['valor_produto'] }}</div>
-        <div class="align-right"><strong>Valor da Mão de Obra:</strong> {{ $dados_completo['valor_mao_obra'] }}</div>
+        <div class="align-right"><strong>Valor da Mão de Obra:</strong> {{ $dados_completo['valor_mao_de_obra'] }}</div>
         <div><strong>Valor Total do Serviço:</strong> R$ {{ $dados_completo['valor_total'] }}</div>
     </div>
 </div>

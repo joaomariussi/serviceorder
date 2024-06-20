@@ -7,12 +7,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 @endpush
 
-@push('head-scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-@endpush
-
 @push('scripts')
     <script src={{ asset('js/scripts.js') }}></script>
 @endpush
@@ -39,8 +33,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="label-servico" for="valor_mao_obra">Valor da Mão de Obra:</label>
-                    <input step="any" class="number-servico" type="text" id="valor_mao_obra" name="valor_mao_obra"
+                    <label class="label-servico" for="valor_mao_de_obra">Valor da Mão de Obra:</label>
+                    <input step="any" class="number-servico" type="text" id="valor_mao_de_obra" name="valor_mao_de_obra"
                            placeholder="R$ 0,00" required>
                 </div>
 

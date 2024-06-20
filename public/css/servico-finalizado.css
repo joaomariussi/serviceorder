@@ -1,16 +1,7 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5;
-    box-sizing: border-box;
-}
-
 .main-content {
     justify-content: center;
-    align-items: center;
     display: flex;
-    margin-left: 220px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 50px;
 }
 
 .container-sucesso {
@@ -20,6 +11,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 650px;
+    margin-left: 70px;
 }
 
 .container-sucesso h1 {
@@ -30,7 +22,7 @@ body {
 
 .container-sucesso p {
     font-size: 1.2em;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     color: #555;
 }
 
@@ -73,4 +65,15 @@ body {
 .btn-imprimir:hover {
     background-color: #218838;
     transform: scale(1.05);
+}
+
+.container-sucesso ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.container-sucesso li {
+    font-size: 1.1em;
+    color: #555;
 }
