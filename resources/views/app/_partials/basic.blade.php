@@ -15,16 +15,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+
 @endpush
 
 <html lang="pt-br">
-        @include('site._partials.head')
-    <body>
-        @include('site._partials.sidebar')
-        @include('site._partials.header')
-        @yield('conteudo')
-        @stack('scripts')
-    </body>
+@include('app._partials.head')
+<body>
+@include('app._partials.sidebar')
+@include('app._partials.header')
+@yield('conteudo')
+@stack('scripts')
+</body>
 </html>
 
 

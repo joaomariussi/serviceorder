@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Throwable;
 
@@ -22,32 +23,43 @@ class ServicoController extends Controller
     {
         try {
             $clientes = ClientesModel::all();
-            return view('site.servico', compact('clientes'));
+            return view('app.servico.criar-servico', compact('clientes'));
         } catch (Throwable $e) {
-            return view('site.servico')->with('error', 'Erro ao carregar a página de serviço: ' . $e->getMessage());
+            return view('app.servico.criar-servico')->with('error', 'Erro ao carregar a página de serviço: ' . $e->getMessage());
         }
     }
 
     public function criarServico(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
     {
+        // Inicia uma transação
+        DB::beginTransaction();
+
         try {
             $clientes = ClientesModel::all(); // Busca os clientes novamente
             $request->session()->put('dados_servico', $request->all());
 
             $dados_servico = $request->session()->get('dados_servico');
 
-            return view('site.finalizar-servico', compact('dados_servico', 'clientes'));
+            // Commita a transação
+            DB::commit();
+
+            return view('app.servico.finalizar-servico', compact('dados_servico', 'clientes'));
 
         } catch (Throwable $e) {
+            // Rollback da transação em caso de erro
+            DB::rollBack();
             return redirect()->back()->with('error', 'Erro ao criar serviço: ' . $e->getMessage());
         }
     }
 
     public function finalizarServico(Request $request): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
     {
+        // Inicia uma transação
+        DB::beginTransaction();
+
         try {
             if (!$request->session()->has('dados_servico')) {
-                return view('site.servico')->with('error',
+                return view('app.servico.servico')->with('error',
                     'Erro ao finalizar serviço: Dados do serviço não encontrados na sessão.');
             }
 
@@ -78,10 +90,11 @@ class ServicoController extends Controller
             $servico->modelo = $dados_completo['modelo'] ?? null;
             $servico->ano = $dados_completo['ano'] ?? null;
             $servico->placa = $dados_completo['placa'] ?? null;
-            $servico->valor_mao_de_obra = (float) $valor_mao_de_obra;
+            $servico->valor_mao_de_obra = (float)$valor_mao_de_obra;
             $servico->valor_total = $dados_completo['valor_total'];
             $servico->save();
 
+            // Percorre os produtos do serviço e salva no banco
             foreach ($dados_completo['produtos'] as $produto) {
                 $servicoProduto = new ServicosProdutosModel();
                 $servicoProduto->id_servico = $servico->id;
@@ -96,17 +109,29 @@ class ServicoController extends Controller
                 // Substituir a vírgula decimal por ponto
                 $valor_produto = str_replace(',', '.', $valor_produto);
                 // Converter para número decimal
-                $servicoProduto->valor_produto = (float) $valor_produto;
+                $servicoProduto->valor_produto = (float)$valor_produto;
                 $servicoProduto->quantidade = $produto['quantidade'];
                 $servicoProduto->save();
+
+                // Atualiza a quantidade do produto no estoque
+                $produtoModel = ProdutosModel::find($produto['id_produto']);
+                if ($produtoModel) {
+                    $produtoModel->quantidade -= $produto['quantidade'];
+                    $produtoModel->save();
+                }
             }
 
             // Armazena os dados completos na sessão
             $request->session()->put('dados_completo', $dados_completo);
 
-            return redirect()->route('site.servico-finalizado');
+            // Commita a transação
+            DB::commit();
+
+            return redirect()->route('app.servico.servico-finalizado');
 
         } catch (Throwable $e) {
+            // Rollback da transação em caso de erro
+            DB::rollBack();
             return redirect()->back()->with('error', 'Erro ao finalizar serviço: ' . $e->getMessage());
         }
     }
@@ -119,7 +144,8 @@ class ServicoController extends Controller
 
             // Verifica se os dados do serviço estão presentes na sessão
             if (!$dados_completo) {
-                return redirect()->route('site.servico')->with('error', 'Erro ao exibir sucesso: Dados do serviço não encontrados.');
+                return redirect()->route('site.servico')->with('error',
+                    'Erro ao exibir sucesso: Dados do serviço não encontrados.');
             }
 
             // Recupere os IDs dos produtos do serviço
@@ -138,9 +164,9 @@ class ServicoController extends Controller
                 }
             }
 
-            return view('site.servico-finalizado', compact('dados_completo'));
+            return view('app.servico.servico-finalizado', compact('dados_completo'));
         } catch (Throwable $e) {
-            return redirect()->route('site.servico')->with('error', 'Erro ao exibir sucesso: ' . $e->getMessage());
+            return redirect()->route('app.servico.servico')->with('error', 'Erro ao exibir sucesso: ' . $e->getMessage());
         }
     }
 
@@ -179,8 +205,8 @@ class ServicoController extends Controller
                 }
             }
 
-            // Retorne a visualização da página do PDF
-            return view('site.visualizar-pdf', compact('dados_completo', 'cliente'));
+            // Retorna a visualização da página do PDF
+            return view('app.servico.visualizar-pdf', compact('dados_completo', 'cliente'));
         } catch (Throwable $e) {
             return redirect()->back()->with('error', 'Erro ao gerar PDF: ' . $e->getMessage());
         }
@@ -226,7 +252,7 @@ class ServicoController extends Controller
             $dompdf = new Dompdf();
 
             // Renderize a visualização da página do PDF
-            $dompdf->loadHtml(View::make('site.exportar-pdf',
+            $dompdf->loadHtml(View::make('app.servico.exportar-pdf',
                 compact('dados_completo', 'cliente'))->render());
 
             // Renderize o PDF
@@ -237,6 +263,24 @@ class ServicoController extends Controller
 
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao exportar PDF: ' . $e->getMessage());
+        }
+    }
+
+    public function visualizarServico(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
+    {
+        try {
+            // Recupere os dados do serviço da sessão se não forem passados como parâmetro
+            $clientes = ClientesModel::all();
+            $servicos = ServicoModel::with('cliente', 'produtos')->get();
+
+            // Calcula quantidade total de produtos e valor total por pedido
+            foreach ($servicos as $servico) {
+                $servico->quantidade_total = $servico->produtos->sum('quantidade');
+            }
+
+            return view('app.servico.index', compact('clientes', 'servicos'));
+        } catch (Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

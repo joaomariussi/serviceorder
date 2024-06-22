@@ -12,21 +12,19 @@
         <ul class="menu">
             <li><a href="{{ route('site.home') }}">Dashboard</a></li>
             <li class="submenu">
-                <a href="#">Clientes</a>
+                <a href="{{ route('app.cliente') }}">Clientes</a>
                 <ul class="submenu-items">
                     <li><a href="#">Novo Cliente</a></li>
-                    <li><a href="{{ route('site.cliente')}}">Visualizar Clientes</a></li>
+                    <li><a href="{{ route('app.cliente')}}">Visualizar Clientes</a></li>
                 </ul>
             </li>
             <li class="submenu">
                 <a href="#">Serviços</a>
                 <ul class="submenu-items">
-                    <li><a href="{{ route('site.servico')}}">Novo Serviço</a></li>
-                    <li><a href="#">Visualizar Serviços</a></li>
+                    <li><a href="{{ route('app.servico.servico')}}">Novo Serviço</a></li>
+                    <li><a href="{{ route('app.servico.index') }}">Visualizar Serviços</a></li>
                 </ul>
             </li>
-            <li><a href="#">Sobre Nós</a></li>
-            <li><a href="#">Contato</a></li>
             <li><a href="{{ route('logout') }}">Sair</a></li>
         </ul>
     </div>

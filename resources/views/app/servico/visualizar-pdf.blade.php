@@ -1,4 +1,4 @@
-@extends('site._partials.basic')
+@extends('app._partials.basic')
 
 <title>Visualizar PDF</title>
 
@@ -110,7 +110,7 @@
                     <a href="{{ route('site.home') }}" class="button-voltar">Voltar para Home</a>
                 </div>
                 <div class="button-container">
-                    <a href="{{ route('site.exportar-pdf', ['dados_completo' => $dados_completo]) }}"
+                    <a href="{{ route('app.servico.exportar-pdf', ['dados_completo' => $dados_completo]) }}"
                        class="btn-imprimir">Imprimir PDF</a>
                 </div>
             </div>

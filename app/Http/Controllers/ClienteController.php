@@ -15,9 +15,9 @@ class ClienteController extends Controller
     {
         try {
             $clientes = ClientesModel::all();
-            return view('site.cliente.index', compact('clientes'));
+            return view('app.cliente.index', compact('clientes'));
         } catch (Exception $e) {
-            return view('site.cliente.index', ['message' => $e->getMessage()]);
+            return view('app.cliente.index', ['message' => $e->getMessage()]);
         }
     }
 

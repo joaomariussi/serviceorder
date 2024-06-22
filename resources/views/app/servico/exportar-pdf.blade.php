@@ -133,7 +133,7 @@
     function formatarCPF($cpf): string
     {
         // Formata o CPF com pontos e traço
-        return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+        return substr($cpf, 0, 3) . 'php-file-iterator' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
     }
 
     function formatarValor($valor): string

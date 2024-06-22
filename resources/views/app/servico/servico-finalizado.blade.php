@@ -1,4 +1,4 @@
-@extends('site._partials.basic')
+@extends('app._partials.basic')
 
 @section('title', 'Serviço Finalizado')
 
@@ -27,11 +27,13 @@
 
                 <p><strong>Valor Total:</strong> R$ {{ number_format(floatval($dados_completo['valor_total']), 2, ',', '.') }}</p>
 
-                <div class="botoes-navegacao">
-                    <button type="button" onclick="window.location.href='{{ route('site.home') }}'" class="button-voltar">
+                <div class="container-buttons">
+                    <a href="{{ route('site.home') }}" type="button" class="button-voltar">
                         Voltar para Home
-                    </button>
-                    <a href="{{ route('site.servico-pdf') }}" class="btn btn-imprimir">Visualizar Serviço</a>
+                    </a>
+                    <a href="{{ route('app.servico.servico-pdf') }}" class="btn btn-imprimir">
+                        Visualizar Serviço
+                    </a>
                 </div>
             </div>
         </section>

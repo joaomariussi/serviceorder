@@ -1,10 +1,9 @@
-@extends('site._partials.basic')
+@extends('app._partials.basic')
 
 @section('title', 'Finalizar Serviço')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/finalizar-servico.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 @endpush
 
 @push('scripts')
@@ -15,7 +14,7 @@
     <div class="main-content">
         <div class="container-servico">
             <h1>Cadastro de Ordem de Serviço</h1>
-            <form class="form-servico" action="{{ route('site.finalizar-servico') }}" method="post" id="form-servico">
+            <form class="form-servico" action="{{ route('app.servico.finalizar-servico') }}" method="post" id="form-servico">
                 @csrf
                 <div class="form-group">
                     <button type="button" id="openModal" class="button-open-modal">Selecionar Produtos</button>
@@ -45,14 +44,12 @@
                 </div>
 
                 <div class="container-buttons">
-                    <div class="button-container">
-                        <button type="button" onclick="window.location.href='{{ route('site.servico') }}'"
-                                class="button-voltar">Voltar
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <button type="submit" class="button-finalizar">Finalizar Serviço</button>
-                    </div>
+                    <a href="{{ route('app.servico.servico') }}" type="button" class="button-voltar">
+                        Voltar
+                    </a>
+                    <button type="submit" class="button-finalizar">
+                        Finalizar Serviço
+                    </button>
                 </div>
             </form>
         </div>

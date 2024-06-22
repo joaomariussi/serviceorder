@@ -1,3 +1,4 @@
+
 .main-content {
     margin-left: 220px;
     padding: 20px;
@@ -102,34 +103,56 @@ select:invalid {
     border-radius: 5px;
 }
 
-.button-finalizar {
-    background-color: #007bff;
-    padding: 10px 25px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.3s;
+.container-buttons {
+    display: flex;
+    justify-content: space-between; /* Ajusta os botões para os cantos */
+    margin-top: 20px;
+    width: 100%;
 }
 
-.button-finalizar:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+.button-finalizar {
+    background-color: #007bff;
+    color: #fff;
+    width: 18%;
+    padding: 10px 0 10px 0;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    display: inline-block; /* Garante que o <a> se comporte como um botão */
+    cursor: pointer; /* Adiciona cursor pointer para ambos */
+    font-family: Arial, sans-serif; /* Define a família da fonte */
+    font-size: 16px; /* Define o tamanho da fonte */
+    font-weight: 400; /* Define o peso da fonte */
+    line-height: 1.5; /* Define a altura da linha */
 }
 
 .button-voltar {
-    padding: 10px 30px;
-    color: #fff;
     background-color: #6c757d;
+    color: #fff;
+    width: 17%;
+    padding: 10px 0 10px 0;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    text-align: center;
     transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    display: inline-block; /* Garante que o <a> se comporte como um botão */
+    cursor: pointer; /* Adiciona cursor pointer para ambos */
+    font-family: Arial, sans-serif; /* Define a família da fonte */
+    font-size: 16px; /* Define o tamanho da fonte */
+    font-weight: 400; /* Define o peso da fonte */
+    line-height: 1.5; /* Define a altura da linha */
 }
 
 .button-voltar:hover {
     background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+.button-finalizar:hover {
+    background-color: #0056b3;
     transform: scale(1.05);
 }
 
@@ -242,10 +265,4 @@ select:invalid {
 
 .button-remover-produto:hover {
     background-color: #cc0000;
-}
-
-.container-buttons {
-    display: flex;
-    justify-content: space-between; /* Ajusta os botões para os cantos */
-    margin-top: 20px;
 }

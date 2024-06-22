@@ -1,6 +1,6 @@
 @php use Carbon\Carbon; @endphp
 
-@extends('site._partials.basic')
+@extends('app._partials.basic')
 
 @section('title', 'Home')
 
@@ -21,7 +21,8 @@
                     <h3>Resumo Semanal</h3>
                 </div>
                 <div class="date-range">
-                    <p>Dados desta semana, de {{ Carbon::now()->startOfWeek()->format('d/m/Y') }} até {{ Carbon::now()->endOfWeek()->format('d/m/Y') }}</p>
+                    <p>Dados desta semana, de {{ Carbon::now()->startOfWeek()->format('d/m/Y') }}
+                        até {{ Carbon::now()->endOfWeek()->format('d/m/Y') }}</p>
                 </div>
 
                 <div class="dashboard-cards">

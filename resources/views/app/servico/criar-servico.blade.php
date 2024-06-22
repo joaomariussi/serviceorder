@@ -1,4 +1,4 @@
-@extends('site._partials.basic')
+@extends('app._partials.basic')
 
 @section('title', 'Criar Serviço')
 
@@ -15,7 +15,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <form class="form-servico" action="{{ route('site.criar-servico') }}"
+            <form class="form-servico" action="{{ route('app.servico.salvar-servico') }}"
                   method="post" onsubmit="return validarFormulario()">
                 @csrf
                 <div class="form-group">
@@ -92,14 +92,12 @@
                 </div>
 
                 <div class="container-buttons">
-                    <div class="button-container">
-                        <button type="button" onclick="window.location.href='{{ route('site.home') }}'"
-                                class="button-voltar">Voltar para Home
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <button type="submit" class="button-avancar">Avançar</button>
-                    </div>
+                    <a href="{{ route('site.home') }}" class="button button-voltar">
+                        Voltar
+                    </a>
+                    <button type="submit" class="button button-avancar">
+                        Avançar
+                    </button>
                 </div>
             </form>
         </div>
