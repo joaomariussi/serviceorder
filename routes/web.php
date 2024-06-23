@@ -26,14 +26,15 @@ Route::group(['middleware' => 'web'], function () {
     // Rotas relacionadas aos serviços
     Route::group(['prefix' => '/servico'], function () {
         Route::get('/', [ServicoController::class, 'index'])->name('app.servico.servico');
-        Route::get('/visualizar', [ServicoController::class, 'visualizarServico'])->name('app.servico.index');
+        Route::get('/visualizar', [ServicoController::class, 'visualizarTodosServicos'])->name('app.servico.index');
+        Route::get('/visualizar/{id}', [ServicoController::class, 'visualizar'])->name('app.servico.visualizar-servico');
         Route::get('/criar', [ServicoController::class, 'criarServico'])->name('app.servico.criar-servico');
         Route::post('/criar', [ServicoController::class, 'criarServico'])->name('app.servico.salvar-servico');
         Route::get('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
         Route::post('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
-        Route::get('/finalizado', [ServicoController::class, 'servicoFinalizado'])->name('app.servico.servico-finalizado');
+        Route::get('/finalizado/{id}', [ServicoController::class, 'servicoFinalizado'])->name('app.servico.servico-finalizado');
         Route::get('/pdf', [ServicoController::class, 'gerarPdf'])->name('app.servico.servico-pdf');
-        Route::get('/exportar-pdf', [ServicoController::class, 'exportarPdf'])->name('app.servico.exportar-pdf');
+        Route::get('/pdf/{id}', [ServicoController::class, 'exportarPdf'])->name('app.servico.exportar-pdf');
     });
 
     // Rota relacionada aos produtos

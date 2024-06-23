@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @method static where(string $string, $id)
+ */
 class ServicosProdutosModel extends Model
 {
 use HasFactory;
@@ -28,11 +31,11 @@ use HasFactory;
 
     public function produto(): BelongsTo
     {
-        return $this->belongsTo(ProdutosModel::class, 'id_produto', 'id_produto');
+        return $this->belongsTo(ProdutosModel::class, 'id_produto', 'id');
     }
 
     public function cliente(): BelongsTo
     {
-        return $this->belongsTo(ClientesModel::class, 'id_cliente', 'id_cliente');
+        return $this->belongsTo(ClientesModel::class, 'id_cliente', 'id');
     }
 }

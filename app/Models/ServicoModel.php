@@ -9,12 +9,26 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method count()
+ * @method static find($id)
  */
 class ServicoModel extends Model
 {
     use HasFactory;
 
     protected $table = 'servicos';
+
+    protected $fillable = [
+        'id_cliente',
+        'nome_carro',
+        'marca',
+        'modelo',
+        'ano',
+        'placa',
+        'valor_mao_de_obra',
+        'valor_total',
+        'created_at',
+        'updated_at'
+    ];
 
     public function cliente(): BelongsTo
     {

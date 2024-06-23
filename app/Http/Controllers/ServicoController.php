@@ -6,15 +6,16 @@ use App\Models\ClientesModel;
 use App\Models\ProdutosModel;
 use App\Models\ServicoModel;
 use App\Models\ServicosProdutosModel;
-use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 use Throwable;
 
 class ServicoController extends Controller
@@ -29,7 +30,7 @@ class ServicoController extends Controller
         }
     }
 
-    public function criarServico(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
+    public function criarServico(Request $request): Factory|View|RedirectResponse|Application
     {
         // Inicia uma transação
         DB::beginTransaction();
@@ -52,7 +53,7 @@ class ServicoController extends Controller
         }
     }
 
-    public function finalizarServico(Request $request): \Illuminate\Contracts\View\View|Factory|Application|RedirectResponse
+    public function finalizarServico(Request $request): View|Factory|Application|RedirectResponse
     {
         // Inicia uma transação
         DB::beginTransaction();
@@ -127,7 +128,8 @@ class ServicoController extends Controller
             // Commita a transação
             DB::commit();
 
-            return redirect()->route('app.servico.servico-finalizado');
+            // Redireciona para a view de serviço finalizado com o ID do serviço
+            return redirect()->route('app.servico.servico-finalizado', ['id' => $servico->id]);
 
         } catch (Throwable $e) {
             // Rollback da transação em caso de erro
@@ -136,11 +138,14 @@ class ServicoController extends Controller
         }
     }
 
-    public function servicoFinalizado(Request $request): Factory|\Illuminate\Contracts\View\View|Application|RedirectResponse
+    public function servicoFinalizado(Request $request, $id): Factory|View|Application|RedirectResponse
     {
         try {
             // Recupera os dados do serviço da sessão
             $dados_completo = $request->session()->get('dados_completo');
+
+            // Recupera o serviço com base no ID
+            $servico = ServicoModel::find($id);
 
             // Verifica se os dados do serviço estão presentes na sessão
             if (!$dados_completo) {
@@ -164,13 +169,13 @@ class ServicoController extends Controller
                 }
             }
 
-            return view('app.servico.servico-finalizado', compact('dados_completo'));
+            return view('app.servico.servico-finalizado', compact('dados_completo', 'servico'));
         } catch (Throwable $e) {
             return redirect()->route('app.servico.servico')->with('error', 'Erro ao exibir sucesso: ' . $e->getMessage());
         }
     }
 
-    public function gerarPdf(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
+    public function gerarPdf(Request $request): Factory|View|RedirectResponse|Application
     {
         try {
             // Recupere os dados do serviço da sessão se não forem passados como parâmetro
@@ -212,61 +217,55 @@ class ServicoController extends Controller
         }
     }
 
-    public function exportarPdf(Request $request): ?RedirectResponse
+    public function exportarPdf($id): Response|RedirectResponse
     {
         try {
-            // Recupere os dados do serviço da sessão se não forem passados como parâmetro
-            $dados_completo = $request->get('dados_completo');
+            $servico = ServicoModel::with('cliente')->find($id);
 
-            // Recupere o cliente associado ao serviço
-            $cliente = ClientesModel::find($dados_completo['id_cliente']);
+            if ($servico) {
+                $servico_produtos = ServicosProdutosModel::where('id_servico', $id)->with('produto')->get();
 
-            // Verifique se o cliente foi encontrado com sucesso
-            if (!$cliente) {
-                throw new Exception('Cliente não encontrado.');
+                // Calcula a quantidade total de produtos no serviço
+                $quantidade_total = $servico_produtos->sum('quantidade');
+
+                // Calcular o valor total dos produtos
+                $valor_produto_total = $servico_produtos->sum(function($servico_produto) {
+                    return $servico_produto->quantidade * $servico_produto->valor_produto;
+                });
+
+                // Dados completos para a view do PDF
+                $dados_completo = [
+                    'nome_carro' => $servico->nome_carro,
+                    'marca' => $servico->marca,
+                    'modelo' => $servico->modelo,
+                    'ano' => $servico->ano,
+                    'placa' => $servico->placa,
+                    'produtos' => $servico_produtos->toArray(),
+                    'valor_total_produtos' => $valor_produto_total,
+                    'valor_mao_de_obra' => $servico->valor_mao_de_obra,
+                    'valor_total' => $servico->valor_total,
+                ];
+
+                // Carregar a visualização do PDF
+                $pdf = PDF::loadView('app.servico.exportar-pdf',
+                    compact(
+                        'servico',
+                        'servico_produtos',
+                        'quantidade_total',
+                        'dados_completo'
+                    ));
+
+                // Retorna o PDF para download
+                return $pdf->download('servico_' . $servico->id . '.pdf');
+            } else {
+                return redirect()->back()->with('error', 'Serviço não encontrado!');
             }
-
-            // Verifique se os produtos estão presentes nos dados do serviço
-            if (!isset($dados_completo['produtos'])) {
-                throw new Exception('Produtos não encontrados nos dados do serviço.');
-            }
-
-            // Recupere os IDs dos produtos do serviço
-            $produtosIds = array_column($dados_completo['produtos'], 'id_produto');
-
-            // Busque os detalhes dos produtos com base nos IDs
-            $produtosDetalhes = ProdutosModel::whereIn('id', $produtosIds)->get();
-
-            // Combine os detalhes dos produtos com os dados do serviço
-            foreach ($dados_completo['produtos'] as &$produto) {
-                foreach ($produtosDetalhes as $produtoDetalhe) {
-                    if ($produto['id_produto'] == $produtoDetalhe->id) {
-                        $produto['nome'] = $produtoDetalhe->nome;
-                        // Adicione outros detalhes do produto conforme necessário
-                        break;
-                    }
-                }
-            }
-
-            // Crie uma nova instância do Dompdf
-            $dompdf = new Dompdf();
-
-            // Renderize a visualização da página do PDF
-            $dompdf->loadHtml(View::make('app.servico.exportar-pdf',
-                compact('dados_completo', 'cliente'))->render());
-
-            // Renderize o PDF
-            $dompdf->render();
-
-            // Envie o PDF para o navegador
-            return $dompdf->stream('exportar-pdf');
-
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Erro ao exportar PDF: ' . $e->getMessage());
         }
     }
 
-    public function visualizarServico(Request $request): Factory|\Illuminate\Contracts\View\View|RedirectResponse|Application
+    public function visualizarTodosServicos(): Factory|View|RedirectResponse|Application
     {
         try {
             // Recupere os dados do serviço da sessão se não forem passados como parâmetro
@@ -280,6 +279,28 @@ class ServicoController extends Controller
 
             return view('app.servico.index', compact('clientes', 'servicos'));
         } catch (Throwable $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function visualizar($id): Factory|View|RedirectResponse|Application
+    {
+        try {
+            $servico = ServicoModel::with('cliente')->find($id);
+
+            if ($servico) {
+                $servico_produtos = ServicosProdutosModel::where('id_servico', $id)->get();
+
+                // Calcula a quantidade total de produtos no serviço
+                $quantidade_total = $servico_produtos->sum('quantidade');
+
+                return view('app.servico.visualizar-servico',
+                    compact('servico', 'servico_produtos', 'quantidade_total'));
+            } else {
+                return redirect()->back()->with('error', 'Serviço não encontrado!');
+
+            }
+        } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

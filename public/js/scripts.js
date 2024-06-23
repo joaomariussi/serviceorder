@@ -230,3 +230,15 @@ document.addEventListener('DOMContentLoaded', function () {
         affixesStay: true
     });
 });
+
+function formatarCpf(cpf) {
+    return cpf.substr(0, 3) + '.' + cpf.substr(3, 3) + '.' + cpf.substr(6, 3) + '-' + cpf.substr(9, 2);
+}
+
+function formatarCep(cep) {
+    return cep.substr(0, 5) + '-' + cep.substr(5, 3);
+}
+
+function formatarTelefone(telefone) {
+    return '(' + telefone.substr(0, 2) + ') ' + telefone.substr(2, 5) + '-' + telefone.substr(7, 4);
+}

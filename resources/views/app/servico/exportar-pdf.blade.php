@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <title>Visualizar PDF</title>
     <style>
         body {
@@ -72,15 +73,15 @@
     <h2>Dados do Cliente</h2>
     <div class="cliente-info">
         <div class="cliente-info-column">
-            <p><strong>Nome:</strong> {{ $cliente->nome }}</p>
-            <p><strong>Email:</strong> {{ $cliente->email }}</p>
-            <p><strong>CPF:</strong> {{ formatarCPF($cliente->cpf) }}</p>
-            <p><strong>Endereço:</strong> {{ $cliente->endereco }}</p>
-            <p><strong>Cidade:</strong> {{ $cliente->cidade }}</p>
+            <p><strong>Nome:</strong> {{ $servico->cliente->nome }}</p>
+            <p><strong>Email:</strong> {{ $servico->cliente->email }}</p>
+            <p><strong>CPF:</strong> {{ formatarCPF($servico->cliente->cpf) }}</p>
+            <p><strong>Endereço:</strong> {{ $servico->cliente->endereco }}</p>
+            <p><strong>Cidade:</strong> {{ $servico->cliente->cidade }}</p>
         </div>
         <div class="cliente-info-column">
-            <p><strong>Telefone:</strong> {{ $cliente->telefone }}</p>
-            <p><strong>Bairro:</strong> {{ $cliente->bairro }}</p>
+            <p><strong>Telefone:</strong> {{ $servico->cliente->telefone }}</p>
+            <p><strong>Bairro:</strong> {{ $servico->cliente->bairro }}</p>
         </div>
     </div>
 </div>
@@ -108,7 +109,7 @@
         <tbody>
         @foreach ($dados_completo['produtos'] as $produto)
             <tr>
-                <td>{{ $produto['nome'] }}</td>
+                <td>{{ $produto['produto']['nome'] }}</td>
                 <td>{{ formatarValor($produto['valor_produto']) }}</td>
                 <td>{{ $produto['quantidade'] }}</td>
                 <td>{{ formatarValor($produto['valor_produto'] * $produto['quantidade']) }}</td>
@@ -121,9 +122,9 @@
 <div class="section highlight">
     <h2>Orçamento</h2>
     <div class="orcamento-info">
-        <div><strong>Valor dos Produtos:</strong> {{ $dados_completo['valor_produto'] }}</div>
-        <div class="align-right"><strong>Valor da Mão de Obra:</strong> {{ $dados_completo['valor_mao_de_obra'] }}</div>
-        <div><strong>Valor Total do Serviço:</strong> R$ {{ $dados_completo['valor_total'] }}</div>
+        <div><strong>Valor dos Produtos:</strong> {{ formatarValor($dados_completo['valor_total_produtos']) }}</div>
+        <div class="align-right"><strong>Valor da Mão de Obra:</strong> {{ formatarValor($dados_completo['valor_mao_de_obra']) }}</div>
+        <div><strong>Valor Total do Serviço:</strong> {{ formatarValor($dados_completo['valor_total']) }}</div>
     </div>
 </div>
 </body>
@@ -132,13 +133,11 @@
 @php
     function formatarCPF($cpf): string
     {
-        // Formata o CPF com pontos e traço
-        return substr($cpf, 0, 3) . 'php-file-iterator' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+        return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
     }
 
     function formatarValor($valor): string
     {
-    // Formata o valor com duas casas decimais
-    return 'R$ ' . number_format($valor, 2, ',', '.');
-}
+        return 'R$ ' . number_format($valor, 2, ',', '.');
+    }
 @endphp
