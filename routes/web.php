@@ -33,6 +33,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
         Route::post('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
         Route::get('/finalizado/{id}', [ServicoController::class, 'servicoFinalizado'])->name('app.servico.servico-finalizado');
+        Route::delete('/excluir/{id}', [ServicoController::class, 'excluir'])->name('app.servico.excluir-servico');
         Route::get('/pdf', [ServicoController::class, 'gerarPdf'])->name('app.servico.servico-pdf');
         Route::get('/pdf/{id}', [ServicoController::class, 'exportarPdf'])->name('app.servico.exportar-pdf');
     });

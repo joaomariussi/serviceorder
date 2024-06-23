@@ -175,6 +175,28 @@ class ServicoController extends Controller
         }
     }
 
+    public function excluir($id): JsonResponse
+    {
+        try {
+            $servico = ServicoModel::find($id);
+
+            if ($servico) {
+                // Excluí registros na tabela servicos_produtos associados ao serviço
+                ServicosProdutosModel::where('id_servico', $id)->delete();
+                // Excluí o serviço
+                $servico->delete();
+                flash()->success('Serviço excluído com sucesso!');
+                return response()->json(['message' => 'Serviço excluído com sucesso!', 'servico' => $servico]);
+            } else {
+                flash()->error('Serviço não encontrado!');
+                return response()->json(['error' => 'Serviço não encontrado!'], 404);
+            }
+        } catch (Exception $e) {
+            flash()->error('Ocorreu um erro ao excluir o serviço. Por favor, tente novamente.');
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function gerarPdf(Request $request): Factory|View|RedirectResponse|Application
     {
         try {

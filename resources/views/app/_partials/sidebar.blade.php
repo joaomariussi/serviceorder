@@ -6,7 +6,7 @@
     <div class="sidebar">
         <div class="logo-menu">
             <a href="{{ route('site.home') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
+                <img src="{{ asset('images/logo-02.png') }}" alt="Logo" class="logo">
             </a>
         </div>
         <ul class="menu">

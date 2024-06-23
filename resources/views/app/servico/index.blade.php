@@ -45,7 +45,7 @@
                                     <input type="hidden" name="cliente_id" value="{{ $servico->id }}">
                                     <div class="button-container">
                                         <a href="{{ route('app.servico.visualizar-servico', $servico->id) }}" class="button-view">Visualizar</a>
-                                        <button type="button" class="button-delete" onclick="excluirCliente('{{ $servico->id }}')">Excluir</button>
+                                        <button type="button" class="button-delete" onclick="excluirServico('{{ $servico->id }}')">Excluir</button>
                                     </div>
                                 </form>
                             </td>
@@ -59,11 +59,11 @@
     </div>
 
     <script>
-        function excluirPedido(id) {
-            if (confirm('Deseja realmente excluir este pedido?')) {
+        function excluirServico(id) {
+            if (confirm('Deseja realmente excluir este serviço?')) {
                 $.ajax({
                     type: 'DELETE',
-                    url: '/clientes/excluir/' + id,
+                    url: '/servico/excluir/' + id,
                     data: {
                         _token: '{{ csrf_token() }}'
                     },

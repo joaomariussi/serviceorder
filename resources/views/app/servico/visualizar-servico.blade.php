@@ -11,25 +11,40 @@
         <a href="{{ route('app.servico.index') }}" class="botao-voltar">Voltar</a>
 
         <div class="informacoes">
-            <div class="info-servico coluna-informacoes">
+            <div class="coluna-informacoes">
                 <h3>Informações do Pedido</h3>
                 <p><strong>ID do Pedido:</strong> {{ $servico->id }}</p>
                 <p><strong>Pedido criado em:</strong> {{ $servico->created_at->format('d/m/Y H:i') }}</p>
                 <a class="button-imprimir" href="{{ route('app.servico.exportar-pdf', ['id' => $servico->id]) }}">
                     Imprimir Pedido
                 </a>
+            </div>
+        </div>
 
+        <div class="resumo-servico">
+            <div class="card">
+                <i class="fas fa-wrench fa-2x"></i>
+                <h4>Valor da Mão de Obra</h4>
+                <p>R$ {{ number_format($servico->valor_mao_de_obra, 2, ',', '.') }}</p>
             </div>
 
-            <div class="resumo-servico">
-                <div class="card">
-                    <h4>Total do Pedido</h4>
-                    <p>R$ {{ number_format($servico->valor_total, 2, ',', '.') }}</p>
-                </div>
-                <div class="card">
-                    <h4>Quantidade de Itens</h4>
-                    <p>{{ $quantidade_total }}</p>
-                </div>
+            <div class="card">
+                <i class="fas fa-money-check-alt fa-2x"></i>
+                <h4>Subtotal do Pedido</h4>
+                <p>R$ {{ number_format($servico->valor_total - $servico->valor_mao_de_obra, 2, ',', '.') }}</p>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-dollar-sign fa-2x"></i>
+                <h4>Total do Pedido</h4>
+                <br>
+                <p>R$ {{ number_format($servico->valor_total, 2, ',', '.') }}</p>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-boxes fa-2x"></i>
+                <h4>Quantidade de Itens</h4>
+                <p>{{ $quantidade_total }}</p>
             </div>
         </div>
 
