@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('app._partials.basic')
 
 @section('title', 'Visualizar Cliente '. $cliente->id)
@@ -9,14 +10,33 @@
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="informacoes">
-            <div class="coluna-informacoes">
-                <h3>Informações do Cliente</h3>
-                <p><strong>Nome:</strong> {{ $cliente->nome }}</p>
-                <p><strong>Email:</strong> {{ $cliente->email }}</p>
-                <p><strong>Cliente Criado em:</strong> {{ $cliente->created_at->format('d/m/Y H:i') }}</p>
-                <div class="button-container">
-                    <a href="{{ route('app.cliente') }}" class="button-voltar">Voltar</a>
+            <h3>Informações do Cliente</h3>
+            <div class="colunas">
+                <div class="coluna-informacoes">
+                    <p><strong>ID do Cliente:</strong> {{ $cliente->id }}</p>
+                    <p><strong>Nome:</strong> {{ $cliente->nome }}</p>
+                    <p><strong>Email:</strong> {{ $cliente->email }}</p>
+                    <p>
+                        <strong>Telefone:</strong> {{ preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $cliente->telefone) }}
+                    </p>
+                    <p><strong>Gênero:</strong> {{ $cliente->sexo }}</p>
+                    <p><strong>Data de
+                            Nascimento:</strong> {{ Carbon::parse($cliente->data_nascimento)->format('d/m/Y') }}</p>
+                    <p>
+                        <strong>CPF:</strong> {{ preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cliente->cpf) }}
+                    </p>
                 </div>
+                <div class="coluna-informacoes">
+                    <p><strong>Endereço:</strong> {{ $cliente->endereco }}</p>
+                    <p><strong>Cidade:</strong> {{ $cliente->cidade }}</p>
+                    <p><strong>Bairro:</strong> {{ $cliente->bairro }}</p>
+                    <p><strong>UF:</strong> {{ $cliente->estado }}</p>
+                    <p><strong>CEP:</strong> {{ preg_replace('/(\d{5})(\d{3})/', '$1-$2', $cliente->cep) }}</p>
+                    <p><strong>Cliente Criado em:</strong> {{ $cliente->created_at->format('d/m/Y H:i') }}</p>
+                </div>
+            </div>
+            <div class="button-container">
+                <a href="{{ route('app.cliente') }}" class="button-voltar">Voltar</a>
             </div>
         </div>
 

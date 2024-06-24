@@ -113,5 +113,35 @@ class ProdutosSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('produtos')->insert([
+            'codigo' => '87463512',
+            'nome' => 'Ventoinha',
+            'descricao' => 'Ventoinha Radiador Gol Quadrado CHT',
+            'preco' => 55.99,
+            'quantidade' => 25,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('produtos')->insert([
+            'codigo' => '88778899',
+            'nome' => 'Vela de ignição',
+            'descricao' => 'Vela de ignição',
+            'preco' => 90.00,
+            'quantidade' => 10,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('produtos')->insert([
+            'codigo' => '88990011',
+            'nome' => 'Bucha da bandeja',
+            'descricao' => 'Bucha de bandeja, Volkswagen Gol',
+            'preco' => 100.00,
+            'quantidade' => 25,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

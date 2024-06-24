@@ -1,4 +1,3 @@
-
 /* Estilo para o título principal */
 .titulo {
     text-align: center;
@@ -14,20 +13,26 @@
     padding: 20px;
 }
 
-/* Estilo para o título do serviço */
-.titulo-servico {
-    padding: 70px 0 10px 0;
-    background-color: #2a9ee2;
-    color: #fff;
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-/* Estilo para a seção de informações */
 .informacoes {
     align-items: center;
     margin-bottom: 30px;
     margin-left: 100px;
+}
+
+/* Estilo para o título de informações */
+.informacoes h3 {
+    margin-bottom: 20px;
+    color: #2a9ee2;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+/* Estilo para as colunas */
+.colunas {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 /* Estilo para a coluna de informações */
@@ -41,6 +46,13 @@
     text-align: left;
     margin-bottom: 20px;
     margin-left: 80px;
+}
+
+/* Estilo para os parágrafos */
+.coluna-informacoes p {
+    margin: 10px 0;
+    color: #555;
+    line-height: 1.6;
 }
 
 /* Estilo para o resumo do cliente */
@@ -79,117 +91,6 @@
     color: #333;
     font-size: 22px;
     font-weight: bold;
-}
-
-/* Estilo para a seção de detalhes do serviço */
-.detalhes-servico {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-bottom: 30px;
-    max-width: 1200px;
-    margin-left: 180px;
-}
-
-/* Estilo para as colunas esquerda e direita dos detalhes do serviço */
-.coluna-esquerda, .coluna-direita {
-    width: 50%; /* Ajuste para ocupar metade da largura disponível */
-    padding: 0 20px; /* Espaçamento interno */
-}
-
-/* Estilo para os títulos das seções */
-h3 {
-    margin-bottom: 15px;
-    color: #2a9ee2;
-    font-size: 20px;
-    text-transform: uppercase;
-}
-
-/* Estilo para os parágrafos */
-p {
-    margin: 5px 0;
-    color: #555;
-    line-height: 1.6;
-}
-
-/* Estilo para a tabela de produtos */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-/* Estilo para os cabeçalhos da tabela */
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-    font-size: 16px;
-}
-
-/* Estilo para o cabeçalho da tabela */
-table th {
-    background-color: #f0f2f5;
-    color: #000000;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* Estilo para as linhas pares da tabela */
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* Estilo para o botão de imprimir */
-.button-imprimir {
-    background-color: #2a9ee2;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 5px;
-    transition-duration: 0.4s;
-    text-decoration: none;
-}
-
-/* Efeito hover para o botão de imprimir */
-.button-imprimir:hover {
-    background-color: #1473a9;
-}
-
-.button-voltar {
-    width: 12%;
-    padding: 10px 0 10px 0;
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.3s;
-    text-decoration: none;
-    display: inline-block; /* Garante que o <a> se comporte como um botão */
-    cursor: pointer; /* Adiciona cursor pointer para ambos */
-    font-family: Arial, sans-serif; /* Define a família da fonte */
-    font-size: 16px; /* Define o tamanho da fonte */
-    font-weight: 400; /* Define o peso da fonte */
-    line-height: 1.5; /* Define a altura da linha */
-    margin-top: 10px;
-}
-
-.button-voltar:hover {
-    background-color: #5a6268;
-    transform: scale(1.05);
 }
 
 /* Estilo para a seção de pedidos do cliente */
@@ -241,4 +142,29 @@ table tr:nth-child(even) {
 /* Estilo para as linhas pares da tabela de pedidos */
 .pedidos-cliente table tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+/* Estilo para o botão de voltar */
+.button-voltar {
+    width: 12%;
+    padding: 10px 0 10px 0;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-right: 800px;
+}
+
+.button-voltar:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
 }

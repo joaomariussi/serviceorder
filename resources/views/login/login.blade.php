@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="images/favicon.png">
+        <link rel="icon" type="image/png" href="{{ asset('images/logo-02.png') }}">
         <title>Login</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
@@ -40,13 +40,13 @@
                         <div class="form-group">
                             <label for="email">Usuário</label>
                             <input class="input-email" type="text" name="email" id="email"
-                                   placeholder="Usuário" value="teste@gmail.com" required>
+                                   placeholder="Usuário" required>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Senha</label>
                             <div class="password-wrapper">
-                                <input class="input-senha" type="password" name="password" id="password" value="1234" placeholder="Senha" required>
+                                <input class="input-senha" type="password" name="password" id="password" placeholder="Senha" required>
                                 <span id="showPassword" class="show-eye-icon"><i class="fas fa-eye"></i></span>
                             </div>
                             @error('password')

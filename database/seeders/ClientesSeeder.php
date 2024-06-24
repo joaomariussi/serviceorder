@@ -109,5 +109,37 @@ class ClientesSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('clientes')->insert([
+            'nome' => 'Luciano Azevedo',
+            'email' => 'luciano@hotmail.com',
+            'cpf' => '01040655598',
+            'endereco' => 'Rua dos Bobos, nº 0',
+            'cidade' => 'São Paulo',
+            'bairro' => 'Vila do Chaves',
+            'estado' => 'SP',
+            'cep' => '01010101',
+            'telefone' => '11999999999',
+            'data_nascimento' => '1999-10-10',
+            'sexo' => 'Masculino',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('clientes')->insert([
+            'nome' => 'Wesley Silva',
+            'email' => 'wesley@gmail.com',
+            'cpf' => '98798755798',
+            'endereco' => 'Rua dos Bobos, nº 0',
+            'cidade' => 'São Paulo',
+            'bairro' => 'Vila do Chaves',
+            'estado' => 'SP',
+            'cep' => '01010101',
+            'telefone' => '11999999999',
+            'data_nascimento' => '1999-10-10',
+            'sexo' => 'Masculino',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

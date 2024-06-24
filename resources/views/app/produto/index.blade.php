@@ -42,7 +42,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="cliente_id">
-                                <a href="{{ route('app.produto.visualizar-produto', $produto->id) }}" class="button-view">
+                                <a href="{{ route('app.produto.visualizar', $produto->id) }}" class="button-view">
                                     Visualizar
                                 </a>
                                 <button type="button" class="button-delete" onclick="excluirProduto('{{ $produto->id }}')">

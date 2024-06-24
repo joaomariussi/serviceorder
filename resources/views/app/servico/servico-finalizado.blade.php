@@ -31,7 +31,7 @@
                     <a href="{{ route('site.home') }}" type="button" class="button-voltar">
                         Voltar para Home
                     </a>
-                    <a href="{{ route('app.servico.visualizar-servico', ['id' => $servico->id]) }}" class="btn btn-imprimir">
+                    <a href="{{ route('app.servico.visualizar', ['id' => $servico->id]) }}" class="btn btn-imprimir">
                         Visualizar Serviço
                     </a>
                 </div>

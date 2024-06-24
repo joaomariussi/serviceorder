@@ -55,13 +55,13 @@ class ProdutoController extends Controller
             $pedidos = $produto->pedido()->with('servico')->get();
             $quantidadeVendas = $pedidos->count();
 
-            return view('app.produto.visualizar-produto',
+            return view('app.produto.visualizar',
                 compact('produto',
                     'pedidos',
                     'quantidadeVendas'
                 ));
         } catch (Exception $e) {
-            return view('app.produto.visualizar-produto')->with('error',
+            return view('app.produto.visualizar')->with('error',
                 'Erro ao carregar a página de visualização do produto: ' .
                 $e->getMessage()
             );

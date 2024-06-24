@@ -2,12 +2,12 @@ $(document).ready(function () {
     $('#pedidos').DataTable({
         bDeferRender: true,
         language: {
-            "emptyTable": "Nenhum pedido encontrado",
+            "emptyTable": "Nenhum servico encontrado",
             "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
             "infoFiltered": "(Filtrados de _MAX_ registros)",
             "infoThousands": ".",
             "loadingRecords": "Carregando...",
-            "zeroRecords": "Nenhum cliente encontrado",
+            "zeroRecords": "Nenhum servico encontrado",
             "search": "Pesquisar",
             "paginate": {
                 "next": "Próximo",

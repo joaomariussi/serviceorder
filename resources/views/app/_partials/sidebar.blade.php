@@ -28,7 +28,7 @@
             <li class="submenu">
                 <a href="#">Produtos</a>
                 <ul class="submenu-items">
-                    <li><a href="{{ route('app.produto.index') }}">Visualizar</a></li>
+                    <li><a href="{{ route('app.produto.index') }}">Visualizar Produtos</a></li>
                 </ul>
             </li>
             <li><a href="{{ route('logout') }}">Sair</a></li>

@@ -27,13 +27,13 @@ Route::group(['middleware' => 'web'], function () {
     // Rotas relacionadas aos serviços
     Route::group(['prefix' => '/servico'], function () {
         Route::get('/', [ServicoController::class, 'index'])->name('app.servico.servico');
-        Route::get('/visualizar', [ServicoController::class, 'visualizarTodosServicos'])->name('app.servico.index');
-        Route::get('/visualizar/{id}', [ServicoController::class, 'visualizar'])->name('app.servico.visualizar-servico');
         Route::get('/criar', [ServicoController::class, 'criarServico'])->name('app.servico.criar-servico');
         Route::post('/criar', [ServicoController::class, 'criarServico'])->name('app.servico.salvar-servico');
         Route::any('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
         Route::get('/finalizado/{id}', [ServicoController::class, 'servicoFinalizado'])->name('app.servico.servico-finalizado');
         Route::delete('/excluir/{id}', [ServicoController::class, 'excluir'])->name('app.servico.excluir-servico');
+        Route::get('/visualizar', [ServicoController::class, 'visualizarTodosServicos'])->name('app.servico.index');
+        Route::get('/visualizar/{id}', [ServicoController::class, 'visualizar'])->name('app.servico.visualizar');
         Route::get('/pdf', [ServicoController::class, 'gerarPdf'])->name('app.servico.servico-pdf');
         Route::get('/pdf/{id}', [ServicoController::class, 'exportarPdf'])->name('app.servico.exportar-pdf');
     });
@@ -41,7 +41,7 @@ Route::group(['middleware' => 'web'], function () {
     // Rota relacionada aos produtos
     Route::group(['prefix' => '/produtos'], function () {
         Route::get('/visualizar', [ProdutoController::class, 'visualizarProdutos'])->name('app.produto.index');
-        Route::get('/visualizar/{id}', [ProdutoController::class, 'visualizar'])->name('app.produto.visualizar-produto');
+        Route::get('/visualizar/{id}', [ProdutoController::class, 'visualizar'])->name('app.produto.visualizar');
         Route::delete('/excluir/{id}', [ProdutoController::class, 'excluir'])->name('app.produto.excluir');
     });
 

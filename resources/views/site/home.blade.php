@@ -53,9 +53,12 @@
                             </tr>
                         </table>
                     </div>
-
                 </div>
             </div>
+            <a href="{{ route('app.servico.servico') }}" class="button-iniciar">
+                <i class="fas fa-plus"></i>
+                Iniciar um novo serviço
+            </a>
         </div>
     </div>
 @endsection

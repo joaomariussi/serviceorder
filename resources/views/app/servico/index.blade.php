@@ -44,7 +44,7 @@
                                     @method('DELETE')
                                     <input type="hidden" name="cliente_id" value="{{ $servico->id }}">
                                     <div class="button-container">
-                                        <a href="{{ route('app.servico.visualizar-servico', $servico->id) }}" class="button-view">
+                                        <a href="{{ route('app.servico.visualizar', $servico->id) }}" class="button-view">
                                             Visualizar
                                         </a>
                                         <button type="button" class="button-delete" onclick="excluirServico('{{ $servico->id }}')">

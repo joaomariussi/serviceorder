@@ -189,6 +189,7 @@ table tr:nth-child(even) {
 /* Efeito hover para o botão de imprimir */
 .button-imprimir:hover {
     background-color: #1473a9;
+    transform: scale(1.05);
 }
 
 .button-voltar {

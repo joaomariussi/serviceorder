@@ -316,7 +316,7 @@ class ServicoController extends Controller
                 // Calcula a quantidade total de produtos no serviço
                 $quantidade_total = $servico_produtos->sum('quantidade');
 
-                return view('app.servico.visualizar-servico',
+                return view('app.servico.visualizar',
                     compact('servico', 'servico_produtos', 'quantidade_total'));
             } else {
                 return redirect()->back()->with('error', 'Serviço não encontrado!');
