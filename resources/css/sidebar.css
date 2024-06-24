@@ -22,10 +22,11 @@ body {
 }
 
 .sidebar .logo {
-    margin: 20px auto;
     display: block;
-    width: 50px;
+    width: 130px;
     height: auto;
+    margin-top: 20px;
+    margin-left: 30px;
 }
 
 .sidebar .menu {

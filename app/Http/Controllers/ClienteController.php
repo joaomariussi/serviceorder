@@ -50,4 +50,15 @@ class ClienteController extends Controller
         }
     }
 
+    public function visualizar($id): Factory|View|Application
+    {
+        try {
+            // Busca o cliente pelo ID
+            $cliente = ClientesModel::find($id);
+            return view('app.cliente.visualizar', compact('cliente'));
+        } catch (Exception $e) {
+            return view('app.cliente.visualizar', ['message' => $e->getMessage()]);
+        }
+    }
+
 }

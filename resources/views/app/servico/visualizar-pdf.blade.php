@@ -12,7 +12,7 @@
             <div class="section-logo">
                 <div class="logo-content">
                     <div class="image-logo">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
+                        <img src="{{ asset('images/logo-02.png') }}" alt="Logo" class="logo">
                     </div>
                 </div>
                 <div class="text-content">

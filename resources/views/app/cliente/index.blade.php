@@ -41,11 +41,14 @@
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
-                                    <div class="button-container">
-                                        <button type="button" class="button-view" onclick="">Visualizar</button>
-                                        <button type="button" class="button-edit" onclick="">Editar</button>
-                                        <button type="button" class="button-delete" onclick="excluirCliente('{{ $cliente->id }}')">Excluir</button>
-                                    </div>
+                                    <a href="{{ route('app.cliente.visualizar', $cliente->id) }}" type="button"
+                                       class="button-view" onclick="">
+                                        Visualizar
+                                    </a>
+                                    <button type="button" class="button-delete"
+                                            onclick="excluirCliente('{{ $cliente->id }}')">
+                                        Excluir
+                                    </button>
                                 </form>
                             </td>
                         </tr>

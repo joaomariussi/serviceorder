@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method count()
+ * @method static find($id)
  */
 class ClientesModel extends Model
 {

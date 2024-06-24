@@ -20,6 +20,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['prefix' => '/clientes'], function () {
         Route::get('/visualizar', [ClienteController::class, 'index'])->name('app.cliente');
+        Route::get('/visualizar/{id}', [ClienteController::class, 'visualizar'])->name('app.cliente.visualizar');
         Route::delete('/excluir/{id}', [ClienteController::class, 'excluir'])->name('app.cliente.excluir');
     });
 
