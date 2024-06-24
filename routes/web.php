@@ -30,8 +30,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/visualizar/{id}', [ServicoController::class, 'visualizar'])->name('app.servico.visualizar-servico');
         Route::get('/criar', [ServicoController::class, 'criarServico'])->name('app.servico.criar-servico');
         Route::post('/criar', [ServicoController::class, 'criarServico'])->name('app.servico.salvar-servico');
-        Route::get('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
-        Route::post('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
+        Route::any('/finalizar', [ServicoController::class, 'finalizarServico'])->name('app.servico.finalizar-servico');
         Route::get('/finalizado/{id}', [ServicoController::class, 'servicoFinalizado'])->name('app.servico.servico-finalizado');
         Route::delete('/excluir/{id}', [ServicoController::class, 'excluir'])->name('app.servico.excluir-servico');
         Route::get('/pdf', [ServicoController::class, 'gerarPdf'])->name('app.servico.servico-pdf');
@@ -40,7 +39,8 @@ Route::group(['middleware' => 'web'], function () {
 
     // Rota relacionada aos produtos
     Route::group(['prefix' => '/produtos'], function () {
-        Route::get('/', [ProdutoController::class, 'index'])->name('app.produto.produto');
+        Route::get('/visualizar', [ProdutoController::class, 'visualizarProdutos'])->name('app.produto.index');
+        Route::delete('/excluir/{id}', [ProdutoController::class, 'excluir'])->name('app.produto.excluir');
     });
 
     // Rota para buscar produtos

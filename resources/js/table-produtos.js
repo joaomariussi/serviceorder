@@ -2,12 +2,12 @@ $(document).ready(function () {
     $('#produtos').DataTable({
         bDeferRender: true,
         language: {
-            "emptyTable": "Nenhum registro encontrado",
+            "emptyTable": "Nenhum produto encontrado",
             "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
             "infoFiltered": "(Filtrados de _MAX_ registros)",
             "infoThousands": ".",
             "loadingRecords": "Carregando...",
-            "zeroRecords": "Nenhum cliente encontrado",
+            "zeroRecords": "Nenhum produto encontrado",
             "search": "Pesquisar",
             "paginate": {
                 "next": "Próximo",

@@ -1,15 +1,9 @@
-@extends('site._partials.basic')
+@extends('app._partials.basic')
 
 @section('title', 'Produtos')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/produto.css') }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css">
-@endpush
-
-@push('head-scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 @endpush
 
 @push('scripts')
@@ -18,70 +12,64 @@
 
 @section('conteudo')
     <div class="conteudo-pagina">
-
-        <div class="menu-cliente">
-
-            <table id="produto" class="display" style="width:100%">
+        <div class="title-produtos">
+            <h1 class="title-h1">Produtos Cadastrados</h1>
+        </div>
+        <div class="menu-servico">
+            <table id="produtos" class="display" style="width:100%">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Código</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Quantidade</th>
                     <th scope="col">Opções</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{--                @forelse ($clientes as $cliente)--}}
-                {{--                    <tr>--}}
-                {{--                        <td>{{ $cliente->id }}</td>--}}
-                {{--                        <td>{{ $cliente->nome }}</td>--}}
-                {{--                        <td>{{ $cliente->email }}</td>--}}
-                {{--                        <td>{{ substr($cliente->cpf, 0, 3) }}.{{ substr($cliente->cpf, 3, 3) }}.--}}
-                {{--                            {{ substr($cliente->cpf, 6, 3) }}-{{ substr($cliente->cpf, -2) }}</td>--}}
-                {{--                        <td>{{ substr($cliente->telefone, 0, 2) }} {{ substr($cliente->telefone, 2, 5) }}--}}
-                {{--                            -{{ substr($cliente->telefone, -4) }}</td>--}}
-                {{--                        <td>--}}
-                {{--                            <form class="form-clientes" id="form-editar-fornecedor-{{ $cliente->id }}"--}}
-                {{--                                  --}}{{--                                  action="{{ route('app.fornecedor.editar', ['id' => $cliente->id]) }}"--}}
-                {{--                                  method="post">--}}
-                {{--                                @csrf--}}
-                {{--                                @method('DELETE')--}}
-                {{--                                <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">--}}
-                {{--                                <button type="button" class="button-edit"--}}
-                {{--                                        onclick="">Editar--}}
-                {{--                                </button>--}}
-                {{--                                <button type="button" class="button-delete"--}}
-                {{--                                        onclick="excluirCliente('{{ $cliente->id }}')">Excluir--}}
-                {{--                                </button>--}}
-
-                {{--                            </form>--}}
-                {{--                        </td>--}}
-                {{--                    </tr>--}}
-                {{--                @empty--}}
-                {{--                @endforelse--}}
+                @forelse ($produtos as $produto)
+                    <tr>
+                        <td>{{ $produto->codigo }}</td>
+                        <td>{{ $produto->nome }}</td>
+                        <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
+                        <td>{{ $produto->quantidade }} un</td>
+                        <td>
+                            <form class="form-clientes" id="form-editar-fornecedor-{{ $produto->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="cliente_id" value="{{ $produto->id }}">
+                                <button type="button" class="button-edit"
+                                        onclick="">Editar
+                                </button>
+                                <button type="button" class="button-delete"
+                                        onclick="excluirProduto('{{ $produto->id }}')">Excluir
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                @endforelse
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
-        function excluirCliente(id) {
-            if (confirm('Deseja realmente excluir este cliente?')) {
+        function excluirProduto(id) {
+            if (confirm('Deseja realmente excluir esse produto?')) {
                 $.ajax({
                     type: 'DELETE',
-                    url: '/clientes/excluir/' + id,
+                    url: '/produtos/excluir/' + id,
                     data: {
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (response) {
                         // Redireciona para a página após a exclusão bem-sucedida
-                        window.location.href = '{{ route("site.cliente") }}';
+                        window.location.href = '{{ route("app.produto.index") }}';
                     },
                     error: function (xhr, status, error) {
                         // Redireciona para a página de listagem com a mensagem de erro
-                        window.location.href = '{{ route("site.cliente") }}';
+                        window.location.href = '{{ route("app.produto.index") }}';
                     }
                 });
             }

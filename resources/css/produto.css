@@ -1,25 +1,18 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
 .conteudo-pagina {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 210px;
-    padding: 30px;
+    margin-left: 200px;
+    padding-top: 10px;
 }
 
-.titulo-cliente {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
+.title-h1 {
+    font-size: 25px;
+    color: #000000;
+    margin-left: 100px;
+    margin-top: 50px;
 }
 
-.menu-cliente {
-    justify-content: center;
-    margin-bottom: 20px;
-    grid-column: 2;
+.menu-servico {
+    width: 100%;
+    overflow: hidden;
 }
 
 /* Estilos para o modal */

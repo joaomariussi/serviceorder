@@ -14,15 +14,21 @@
             <li class="submenu">
                 <a href="{{ route('app.cliente') }}">Clientes</a>
                 <ul class="submenu-items">
-                    <li><a href="#">Novo Cliente</a></li>
                     <li><a href="{{ route('app.cliente')}}">Visualizar Clientes</a></li>
                 </ul>
             </li>
             <li class="submenu">
-                <a href="#">Serviços</a>
+                <a href="{{ route('app.servico.index') }}">Serviços</a>
                 <ul class="submenu-items">
                     <li><a href="{{ route('app.servico.servico')}}">Novo Serviço</a></li>
                     <li><a href="{{ route('app.servico.index') }}">Visualizar Serviços</a></li>
+                </ul>
+            </li>
+
+            <li class="submenu">
+                <a href="#">Produtos</a>
+                <ul class="submenu-items">
+                    <li><a href="{{ route('app.produto.index') }}">Visualizar Produtos</a></li>
                 </ul>
             </li>
             <li><a href="{{ route('logout') }}">Sair</a></li>

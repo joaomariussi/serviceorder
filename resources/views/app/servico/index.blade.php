@@ -15,7 +15,7 @@
         <div class="title-cliente">
             <h1 class="title-h1">Serviços realizados</h1>
         </div>
-        <div class="menu-cliente">
+        <div class="menu-servico">
             <div class="conteudo-pagina">
                 <table id="pedidos" class="display">
                     <thead>

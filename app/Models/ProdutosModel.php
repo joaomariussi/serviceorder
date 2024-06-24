@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method count()
+ * @method static find($id)
  */
 class ProdutosModel extends Model
 {
