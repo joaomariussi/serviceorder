@@ -169,17 +169,21 @@ table tr:nth-child(even) {
 /* Estilo para o botão de imprimir */
 .button-imprimir {
     background-color: #2a9ee2;
-    border: none;
     color: white;
-    padding: 10px 20px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 0;
-    cursor: pointer;
+    width: 15%;
+    padding: 10px 0 10px 0;
+    border: none;
     border-radius: 5px;
-    transition-duration: 0.4s;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
     text-decoration: none;
+    display: inline-block; /* Garante que o <a> se comporte como um botão */
+    cursor: pointer; /* Adiciona cursor pointer para ambos */
+    font-family: Arial, sans-serif; /* Define a família da fonte */
+    font-size: 16px; /* Define o tamanho da fonte */
+    font-weight: 400; /* Define o peso da fonte */
+    line-height: 1.5; /* Define a altura da linha */
+    margin-left: 10px;
 }
 
 /* Efeito hover para o botão de imprimir */
@@ -187,21 +191,25 @@ table tr:nth-child(even) {
     background-color: #1473a9;
 }
 
-/* Estilo para o botão de voltar */
-.botao-voltar {
-    position: absolute;
-    top: 160px;
-    left: 20px;
-    padding: 10px 20px;
-    background-color: #504f4f;
-    color: white;
-    text-decoration: none;
+.button-voltar {
+    background-color: #6c757d;
+    color: #fff;
+    width: 12%;
+    padding: 10px 0 10px 0;
+    border: none;
     border-radius: 5px;
-    font-size: 16px;
-    transition-duration: 0.4s;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none;
+    display: inline-block; /* Garante que o <a> se comporte como um botão */
+    cursor: pointer; /* Adiciona cursor pointer para ambos */
+    font-family: Arial, sans-serif; /* Define a família da fonte */
+    font-size: 16px; /* Define o tamanho da fonte */
+    font-weight: 400; /* Define o peso da fonte */
+    line-height: 1.5; /* Define a altura da linha */
 }
 
-/* Efeito hover para o botão de voltar */
-.botao-voltar:hover {
-    background-color: #3a3838;
+.button-voltar:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
 }

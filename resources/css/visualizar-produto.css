@@ -169,21 +169,17 @@ table tr:nth-child(even) {
 /* Estilo para o botão de imprimir */
 .button-imprimir {
     background-color: #2a9ee2;
-    color: white;
-    width: 15%;
-    padding: 10px 0 10px 0;
     border: none;
-    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
     text-align: center;
-    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition-duration: 0.4s;
     text-decoration: none;
-    display: inline-block; /* Garante que o <a> se comporte como um botão */
-    cursor: pointer; /* Adiciona cursor pointer para ambos */
-    font-family: Arial, sans-serif; /* Define a família da fonte */
-    font-size: 16px; /* Define o tamanho da fonte */
-    font-weight: 400; /* Define o peso da fonte */
-    line-height: 1.5; /* Define a altura da linha */
-    margin-left: 10px;
 }
 
 /* Efeito hover para o botão de imprimir */
@@ -192,10 +188,10 @@ table tr:nth-child(even) {
 }
 
 .button-voltar {
-    background-color: #6c757d;
-    color: #fff;
     width: 12%;
     padding: 10px 0 10px 0;
+    background-color: #6c757d;
+    color: #fff;
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -207,9 +203,61 @@ table tr:nth-child(even) {
     font-size: 16px; /* Define o tamanho da fonte */
     font-weight: 400; /* Define o peso da fonte */
     line-height: 1.5; /* Define a altura da linha */
+    margin-top: 10px;
 }
 
 .button-voltar:hover {
     background-color: #5a6268;
     transform: scale(1.05);
+}
+
+/* Estilo para a seção de pedidos do produto */
+.pedidos-produto {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    max-width: 1200px;
+    margin-left: 180px;
+}
+
+/* Estilo para o título dos pedidos */
+.title-pedidos-produto {
+    margin-bottom: 20px;
+    color: #2a9ee2;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+/* Estilo para a tabela de pedidos */
+.pedidos-produto table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Estilo para os cabeçalhos da tabela de pedidos */
+.pedidos-produto table th, .pedidos-produto table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* Estilo para o cabeçalho da tabela de pedidos */
+.pedidos-produto table th {
+    background-color: #f0f2f5;
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Estilo para as linhas pares da tabela de pedidos */
+.pedidos-produto table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }

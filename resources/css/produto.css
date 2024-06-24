@@ -6,7 +6,6 @@
 .title-h1 {
     font-size: 25px;
     color: #000000;
-    margin-left: 100px;
     margin-top: 50px;
 }
 
@@ -50,9 +49,9 @@
     cursor: pointer;
 }
 
-.button-edit {
+.button-view {
     width: auto;
-    background-color: #008CBA;
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -66,8 +65,8 @@
     margin-left: 10px; /* Adiciona uma margem à esquerda para criar espaço entre os botões */
 }
 
-.button-edit:hover {
-    background-color: #007a9b;
+.button-view:hover {
+    background-color: #45a049;
 }
 
 .button-delete {

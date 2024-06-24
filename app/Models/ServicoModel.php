@@ -37,7 +37,7 @@ class ServicoModel extends Model
 
     public function produtos(): HasMany
     {
-        return $this->hasMany(ServicosProdutosModel::class, 'id_servico');
+        return $this->hasMany(ServicosProdutosModel::class, 'id_servico', 'id');
     }
 
 }

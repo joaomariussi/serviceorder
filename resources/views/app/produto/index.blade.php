@@ -21,8 +21,10 @@
                 <tr>
                     <th scope="col">Código</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
                     <th scope="col">Preço</th>
                     <th scope="col">Quantidade</th>
+                    <th scope="col">Criando em</th>
                     <th scope="col">Opções</th>
                 </tr>
                 </thead>
@@ -31,18 +33,20 @@
                     <tr>
                         <td>{{ $produto->codigo }}</td>
                         <td>{{ $produto->nome }}</td>
+                        <td>{{ $produto->descricao }}</td>
                         <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                         <td>{{ $produto->quantidade }} un</td>
+                        <td>{{ date('d/m/Y H:i', strtotime($produto->created_at)) }}</td>
                         <td>
                             <form class="form-clientes" id="form-editar-fornecedor-{{ $produto->id }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <input type="hidden" name="cliente_id" value="{{ $produto->id }}">
-                                <button type="button" class="button-edit"
-                                        onclick="">Editar
-                                </button>
-                                <button type="button" class="button-delete"
-                                        onclick="excluirProduto('{{ $produto->id }}')">Excluir
+                                <input type="hidden" name="cliente_id">
+                                <a href="{{ route('app.produto.visualizar-produto', $produto->id) }}" class="button-view">
+                                    Visualizar
+                                </a>
+                                <button type="button" class="button-delete" onclick="excluirProduto('{{ $produto->id }}')">
+                                    Excluir
                                 </button>
                             </form>
                         </td>

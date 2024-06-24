@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method count()
  * @method static find($id)
+ * @method static findOrFail($id)
  */
 class ProdutosModel extends Model
 {
@@ -20,5 +21,6 @@ class ProdutosModel extends Model
     {
         return $this->hasMany(ServicosProdutosModel::class, 'id_produto', 'id');
     }
+
 
 }

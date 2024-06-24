@@ -26,7 +26,7 @@ use HasFactory;
 
     public function servico(): BelongsTo
     {
-        return $this->belongsTo(ServicoModel::class, 'id_servico', 'id_servico');
+        return $this->belongsTo(ServicoModel::class, 'id_servico', 'id');
     }
 
     public function produto(): BelongsTo

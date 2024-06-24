@@ -40,6 +40,7 @@ Route::group(['middleware' => 'web'], function () {
     // Rota relacionada aos produtos
     Route::group(['prefix' => '/produtos'], function () {
         Route::get('/visualizar', [ProdutoController::class, 'visualizarProdutos'])->name('app.produto.index');
+        Route::get('/visualizar/{id}', [ProdutoController::class, 'visualizar'])->name('app.produto.visualizar-produto');
         Route::delete('/excluir/{id}', [ProdutoController::class, 'excluir'])->name('app.produto.excluir');
     });
 

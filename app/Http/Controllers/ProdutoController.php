@@ -41,4 +41,31 @@ class ProdutoController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function visualizar($id)
+    {
+        try {
+            $produto = ProdutosModel::findOrFail($id);
+
+            if (!$produto) {
+                flash()->error('Produto não encontrado.');
+                return redirect()->route('app.produto.index');
+            }
+
+            $pedidos = $produto->pedido()->with('servico')->get();
+            $quantidadeVendas = $pedidos->count();
+
+            return view('app.produto.visualizar-produto',
+                compact('produto',
+                    'pedidos',
+                    'quantidadeVendas'
+                ));
+        } catch (Exception $e) {
+            return view('app.produto.visualizar-produto')->with('error',
+                'Erro ao carregar a página de visualização do produto: ' .
+                $e->getMessage()
+            );
+        }
+    }
+
 }

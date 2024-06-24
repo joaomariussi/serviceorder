@@ -8,16 +8,18 @@
 
 @section('conteudo')
     <div class="conteudo-pagina">
-        <a href="{{ route('app.servico.index') }}" class="botao-voltar">Voltar</a>
-
         <div class="informacoes">
             <div class="coluna-informacoes">
                 <h3>Informações do Pedido</h3>
                 <p><strong>ID do Pedido:</strong> {{ $servico->id }}</p>
                 <p><strong>Pedido criado em:</strong> {{ $servico->created_at->format('d/m/Y H:i') }}</p>
-                <a class="button-imprimir" href="{{ route('app.servico.exportar-pdf', ['id' => $servico->id]) }}">
-                    Imprimir Pedido
-                </a>
+                <div class="button-container">
+                    <a href="{{ route('app.servico.index') }}" class="button-voltar">Voltar</a>
+                    <a class="button-imprimir" href="{{ route('app.servico.exportar-pdf', ['id' => $servico->id]) }}">
+                        Imprimir Pedido
+                    </a>
+                </div>
+
             </div>
         </div>
 
